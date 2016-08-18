@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yunkuke.dao.UsersDao">
+	<!-- 为dao接口方法提供sql语句配置 -->
+	<insert id="insertUsers">
+		insert ignore
+		into users
+		values(#{userId},#{userName},#{userPassword},#{userSchool},#{userLevel})
+	</insert>
+	<delete id="deleteUsers" parameterType="long">
+		delete
+		from users
+		where
+		user_id=#{userId};
+	</delete>
+	<update id="changeUsersPassword">
+		update
+		users
+		set
+		user_password = #{userPassword}
+		where
+		user_id = #{userId}
+	</update>
+	<select id="searchUsersByUsername" resultType="Users">
+		select
+		user_id,user_name,user_school,user_level
+		from
+		users
+		where user_name =
+		#{userName}
+	</select>
+	<select id="searchUsers" resultType="Users" parameterType="long">
+		select user_id,user_name,user_school,user_level
+		from
+		users
+	</select>
+	<select id="findUserById" resultType="Users" parameterType="long">
+		select user_id,user_name,user_school,user_level
+		from users
+		where user_id
+		= #{userId}
+	</select>
+	<select id="checkLogin" resultType="Users">
+		select user_id
+		from users
+		where user_id = #{userId}
+		and user_password = #{userPassword}
+	</select>
+</mapper>

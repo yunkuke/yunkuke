@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.yunkuke.dao.CourseFileDao">
+
+	<insert id="insertCourseFile">
+		insert ignore
+		into coursefile
+		values(0,#{userId},#{courseFileName},#{courseFileSize},#{courseFileCollege},#{courseFileSubject},now(),
+		#{courseFileGoodpoint},#{courseFilePath},#{courseFileImgpath},#{courseFileLevel})
+	</insert>
+	<select id="findCourseFileAll" resultType="CourseFile">
+		select *
+		from coursefile
+	</select>
+	<select id="findCourseFileById" resultType="CourseFile"
+		parameterType="long">
+		select *
+		from coursefile
+		where courseFile_id =
+		#{courseFileId}
+	</select>
+	<select id="findCourseFileByName" resultType="CourseFile"
+		parameterType="String">
+		select *
+		from coursefile
+		where courseFile_name =
+		#{courseFileName}
+	</select>
+	<select id="searchCourseFilesByCollege" resultType="CourseFile">
+		select *
+		from
+		coursefile
+		where courseFile_college = #{courseFileCollege}
+	</select>
+	<select id="searchCourseFilesBySubject" resultType="CourseFile">
+		select *
+		from
+		coursefile  
+		where courseFile_subject = #{CourseFileSubject}
+	</select>
+	<update id="increaseGoodpoint">
+		update
+		coursefile
+		set
+		courseFile_goodpoint =
+		courseFile_goodpoint+1
+		where courseFile_id = #{courseFileId}
+	</update>
+</mapper>

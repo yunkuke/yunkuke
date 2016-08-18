@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!--閰嶇疆鏁村悎mybatis杩囩▼ -->
+
+	<!--锛?.閰嶇疆鏁版嵁搴撶浉鍏冲弬鏁? -->
+	<context:property-placeholder location="classpath:jdbc.properties" />
+
+	<!--2.閰嶇疆杩炴帴姹犲睘鎬? -->
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="driverClass" value="${jdbc.driver}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="user" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<property name="maxPoolSize" value="30"></property>
+		<property name="minPoolSize" value="10"></property>
+		<!-- 鍏抽棴杩炴帴鍚庝笉鑷姩commit -->
+		<property name="autoCommitOnClose" value="false"></property>
+		<!-- 鑾峰彇杩炴帴瓒呮椂鏃堕棿 -->
+		<property name="checkoutTimeout" value="60000"></property>
+		<!-- 鑾峰彇杩炴帴閲嶈瘯娆℃暟 -->
+		<property name="acquireRetryAttempts" value="3"></property>
+	</bean>
+
+
+
+
+	<!--锛?.閰嶇疆SqlSessionFactory瀵硅薄 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<!--娉ㄥ叆鏁版嵁搴撹繛鎺ユ睜 -->
+		<property name="dataSource" ref="dataSource" />
+		<!--閰嶇疆mybatis鍏ㄥ眬閰嶇疆鏂囦欢:mybatis-config.xml -->
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<!--鎵弿entity鍖?,浣跨敤鍒悕,澶氫釜鐢?;闅斿紑 -->
+		<property name="typeAliasesPackage" value="cn.yunkuke.entity" />
+		<!--鎵弿sql閰嶇疆鏂囦欢:mapper闇?瑕佺殑xml鏂囦欢 -->
+		<property name="mapperLocations" value="classpath:mapper/*.xml" />
+	</bean>
+
+	<!--锛?:閰嶇疆鎵弿Dao鎺ュ彛鍖?,鍔ㄦ?佸疄鐜癉AO鎺ュ彛,娉ㄥ叆鍒皊pring瀹瑰櫒 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<!--娉ㄥ叆SqlSessionFactory -->
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+		<!-- 缁欏嚭闇?瑕佹壂鎻忕殑Dao鎺ュ彛 -->
+		<property name="basePackage" value="cn.yunkuke.dao" />
+	</bean>
+</beans>

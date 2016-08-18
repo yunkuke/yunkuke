@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+        http://www.springframework.org/schema/mvc 
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd 
+        http://www.springframework.org/schema/context 
+        http://www.springframework.org/schema/context/spring-context.xsd">
+	<!--閰嶇疆springmvc -->
+	<!--1:寮?濮婼pringMVC娉ㄨВ妯″紡 -->
+	<!--绠?鍖栭厤缃細 -->
+	<!--1锛夎嚜鍔ㄦ敞鍐孌efaultAnnotationHandlerMapping,AnnotationMethodHandlerAdapter -->
+	<context:annotation-config/>
+	<!--2锛夋彁渚涗竴浜涘垪锛氭暟鎹粦瀹氾紝鏁板瓧鍜屾棩鏈熺殑format @NumberFormat @DataTimeFormart锛寈ml,json 榛樿璇诲啓鏀寔銆? -->
+	<mvc:annotation-driven />
+	<!--2.闈欐?佽祫婧愰粯璁ervlet閰嶇疆 -->
+	<!-- 1).鍔犲叆瀵归潤鎬佽祫婧愬鐞嗭細js,gif,png 2).鍏佽浣跨敤 "/" 鍋氭暣浣撴槧灏? -->
+	<mvc:default-servlet-handler />
+
+	<!--3锛氶厤缃甁SP 鏄剧ずViewResolver -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="viewClass"
+			value="org.springframework.web.servlet.view.JstlView" />
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!--4:鎵弿web鐩稿叧鐨刡ean -->
+	<context:component-scan base-package="cn.yunkuke.web" />
+	<!-- 鏂囧寲閮ㄤ笂浼犻厤缃?
+	200*1024*1024鍗?200M resolveLazily灞炴?у惎鐢ㄦ槸涓轰簡鎺ㄨ繜鏂囦欢瑙ｆ瀽锛屼互渚挎崟鑾锋枃浠跺ぇ灏忓紓甯?
+	 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="209715200" />
+		<property name="defaultEncoding" value="UTF-8" />
+		<property name="resolveLazily" value="true" />
+	</bean>
+</beans>

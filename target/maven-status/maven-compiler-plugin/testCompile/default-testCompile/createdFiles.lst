@@ -1,0 +1,5 @@
+cn\yunkuke\service\UsersServiceImplTest.class
+cn\yunkuke\BaseTest.class
+cn\yunkuke\dao\CourseFileDaoTest.class
+cn\yunkuke\service\CourseFileServiceImplTest.class
+cn\yunkuke\dao\UsersDaoTest.class
