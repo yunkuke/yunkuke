@@ -68,6 +68,5 @@ public interface CourseFileDao {
 	 * @param courseFileGoodpoint
 	 * @return
 	 */
-	public boolean increaseGoodpoint(@Param("courseFileId") long courseFileId,
-			@Param("courseFileGoodpoint") int courseFileGoodpoint);
+	public boolean increaseGoodpoint(@Param("courseFileId") long courseFileId);
 }

@@ -63,6 +63,12 @@ public class CourseFileServiceImpl implements CourseFileService {
 				courseFileSubject,courseFileGoodpoint, courseFilePath, courseFileImgpath, courseFileLevel);
 	}
 
+	@Override
+	public boolean increaseGoodpoint(long courseFileId) {
+		
+		return courseFileDao.increaseGoodpoint(courseFileId);
+	}
+
 
 
 }

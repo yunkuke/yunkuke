@@ -19,9 +19,11 @@
 							<th>ID</th>
 							<th>名称</th>
 							<th>学院</th>
+							<th>课程名</th>
 							<th>点赞量</th>
 							<th>上传时间</th>
-							<th>详情页</th>
+							<th>下载</th>
+							<th>点赞</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -30,10 +32,15 @@
 								<td>${cf.courseFileId}</td>
 								<td>${cf.courseFileName}</td>
 								<td>${cf.courseFileCollege}</td>
+								<td>${cf.courseFileSubject}</td>
 								<td>${cf.courseFileGoodpoint}</td>
 								<td>${cf.courseFileUplodeDate}"</td>
 								<td><a class="btn btn-info"
-									href="/yunkuke/courses/${cf.courseFileId}/detail" target="_blank">详情</a></td>
+									href="/yunkuke/courses/${cf.courseFileId}/detail"
+									target="_blank">下载</a></td>
+								<td><a class="btn btn-info"
+									href="/yunkuke/courses/${cf.courseFileId}/goodpoint"
+									target="_blank">点赞</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>

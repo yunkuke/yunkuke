@@ -95,7 +95,7 @@ public class CourseFileDaoTest {
 		long courseFileId = 1001;
 		if (CourseFileDao.findCourseFileById(courseFileId) != null) {
 			int courseFileGoodpoint = CourseFileDao.findCourseFileById(courseFileId).getCourseFileGoodpoint();
-			boolean state = CourseFileDao.increaseGoodpoint(courseFileId, courseFileGoodpoint);
+			boolean state = CourseFileDao.increaseGoodpoint(courseFileId);
 			if (state == true) {
 				System.out.println(courseFileId + "的赞数为"
 						+ CourseFileDao.findCourseFileById(courseFileId).getCourseFileGoodpoint());

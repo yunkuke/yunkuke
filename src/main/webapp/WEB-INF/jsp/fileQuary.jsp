@@ -7,7 +7,7 @@
 <%@include file="common/head.jsp"%>
 </head>
 <body>
-	<form class="form-horizontal" role="form" action="list">
+	<form  class="form-horizontal" role="form" action="list">
    <div class="form-group">
       <label for="firstname" class="col-sm-2 control-label">根据文件名查询</label>
       <div class="col-sm-10">

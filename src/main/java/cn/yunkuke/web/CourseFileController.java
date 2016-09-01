@@ -43,23 +43,24 @@ public class CourseFileController {
 	
 	String sepa = java.io.File.separator;
 	
-	@RequestMapping("/mvc")
-	public String helloMvc(){
-		return "/courses/home";
-	}
-	 private final Logger LOG = LoggerFactory.getLogger(this.getClass());
+	private final Logger LOG = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private CourseFileService courseFileService;
 	@Autowired
-	private UsersService usersservice;
+	private UsersService usersService;
 	
-	
-	@RequestMapping(value = "/list")  
-	public String list(@Validated String courseFileName,@Validated String courseFileCollege,
-			@Validated String courseFileSubject,Model model){
+	//@Validated
+	@RequestMapping(value = "/list",method = RequestMethod.GET, produces = "text/html;charset=UTF-8")  
+	public String list(@RequestParam String courseFileName,@RequestParam String courseFileCollege,
+			@RequestParam String courseFileSubject,Model model){
 		//list.jsp + model = ModelAndView
-		List<CourseFile> list = courseFileService.getCourseFileList();
-		if(courseFileName!=""){
+		
+		List<CourseFile> list = null;
+		//courseFileService.getCourseFileList();
+		if(courseFileName==""&&courseFileCollege==""&&courseFileSubject==""){
+			list = courseFileService.getCourseFileList();
+		}
+		else if(courseFileName!=""){
 			 list = courseFileService.getCourseFileByName(courseFileName);		
 			}
 		else if(courseFileCollege!=""){
@@ -92,6 +93,14 @@ public class CourseFileController {
 			return" ";
 		}
 	}
+	/**
+	 * 文件上传
+	 * @param file
+	 * @param request
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@RequestMapping(value = "/doFileUpload")  
 	public String doFileUpload(@RequestParam("courseFile") MultipartFile file,
 			HttpServletRequest request,Model model) throws IOException{
@@ -100,7 +109,10 @@ public class CourseFileController {
 			LOG.info("process file{}",file.getOriginalFilename());
 //			String userId,  String courseFileCollege,
 //			int courseFileGoodpoint, String courseFilePath, String courseFileImgpath, int courseFileLevel);
-			String despath = sepa+"data"+sepa+"yunkuke";
+			//本机测试地址
+			String despath = "g:\\"+sepa+"data"+sepa+"yunkuke";
+			//服务器地址
+			//String despath = sepa+"data"+sepa+"yunkuke";
 			String userId="nnull";
 			String courseFileName = file.getOriginalFilename().replaceAll(" ", "");
 			String courseFileCollege =request.getParameter("courseFileCollege");
@@ -119,6 +131,15 @@ public class CourseFileController {
 		
 		return "success"; 
 	}
+	/**
+	 * 文件下载
+	 * @param request
+	 * @param response
+	 * @param courseFileId
+	 * @param model
+	 * @return
+	 * @throws IOException
+	 */
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/{courseFileId}/detail",method = RequestMethod.GET) 
     public String detail(HttpServletRequest request,  
@@ -133,17 +154,15 @@ public class CourseFileController {
 		}
 		CourseFile course =courseFileService.getCourseFileById(courseFileId);
 		response.setContentType("application/x-download"); 
-		String courseFilePath1 = sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
+		//本机测试地址
+		String courseFilePath1 = "g:\\"+sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
+		//服务器地址
+		//String courseFilePath1 = sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
 		LOG.info(sepa+"data"+sepa+"yunkuke"+sepa+course.getCourseFileCollege()+course.getCourseFileSubject()+sepa+course.getCourseFileName());
 		LOG.info(courseFilePath1);  
 //		response.addHeader("Content-Disposition","attachment;filename=" + courseFile.getCourseFileName());   
 		model.addAttribute("courseFilePath1",courseFilePath1);
-//		request.setCharacterEncoding("UTF-8");  
-//	    BufferedInputStream bis = null;  
-//	    BufferedOutputStream bos = null;  
-//	  
-//	   
-//	    
+	    
 	    //获取下载文件露肩
 	    String downLoadPath = courseFilePath1;  
 	  
@@ -165,11 +184,26 @@ public class CourseFileController {
 	    while (-1 != (bytesRead = bis.read(buff, 0, buff.length))) {  
 	      bos.write(buff, 0, bytesRead);  
 	    }  
-//	    //关闭流
+	    //关闭流
 	    bis.close();  
 	    bos.close();  
         return "detail";
     }
-
+	@RequestMapping(value = "/{courseFileId}/goodpoint",method = RequestMethod.GET) 
+    public String doGoodpoint(HttpServletRequest request,  
+    	      HttpServletResponse response,@PathVariable("courseFileId") Long courseFileId ,Model model) throws IOException{
+		if(courseFileId==null){
+			return "redirect:/courses/list";
+		}
+		CourseFile courseFile = courseFileService.getCourseFileById(courseFileId);
+		
+		 if(courseFile == null){
+			return "redirect:/courses/list";
+		}
+		 
+		 courseFileService.increaseGoodpoint(courseFileId);
+		
+        return "list";
+    }
 
 }

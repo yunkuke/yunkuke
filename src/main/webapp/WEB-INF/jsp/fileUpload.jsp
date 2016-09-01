@@ -14,7 +14,7 @@
 				name="courseFile">
 			<p class="help-block">文件的格式必须为。。。。</p>
 		</div>
-		<div class="form-group">
+		
 			<label for="name">所属学院</label> <select class="form-control"
 				name="courseFileCollege">
 				<option>矿业工程学院</option>

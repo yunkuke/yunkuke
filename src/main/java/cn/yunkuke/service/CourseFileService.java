@@ -52,6 +52,7 @@ public interface CourseFileService {
      * @return
      */
 	List<CourseFile> getCourseFileBySubject(String courseFileSubject);
+	boolean increaseGoodpoint(long courseFileId);
 	/**
 	 * 输出下载接口地址
 	 * 

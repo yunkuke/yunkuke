@@ -23,7 +23,7 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
- 	<filter>
+	<filter>
 		<description>Chinese garbled filters</description>
 		<filter-name>ProFilter</filter-name>
 		<filter-class>cn.yunkuke.filters.ProFilter</filter-class>
@@ -31,21 +31,25 @@
 	<filter-mapping>
 		<filter-name>ProFilter</filter-name>
 		<url-pattern>/*</url-pattern>
-	</filter-mapping> 
+	</filter-mapping>
 	<welcome-file-list>
-        <welcome-file>login.jsp</welcome-file>
-    </welcome-file-list>
-    <!-- ================spring mvc 字符串转码过滤器================ -->  
-    <filter>   
-        <filter-name>SpringCharacterEncodingFilter</filter-name>   
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>   
-        <init-param>   
-            <param-name>encoding</param-name>   
-            <param-value>UTF-8</param-value>   
-        </init-param>   
-    </filter>   
-    <filter-mapping>   
-        <filter-name>SpringCharacterEncodingFilter</filter-name>   
-        <url-pattern>/*</url-pattern>   
-    </filter-mapping>  
+		<welcome-file>login.jsp</welcome-file>
+	</welcome-file-list>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>/resources/*</url-pattern>
+	</servlet-mapping>
+	<!-- ================spring mvc 字符串转码过滤器================ -->
+	<filter>
+		<filter-name>SpringCharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>SpringCharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>
