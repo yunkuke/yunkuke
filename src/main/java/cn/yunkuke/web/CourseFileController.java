@@ -56,7 +56,7 @@ public class CourseFileController {
 	
 	//@Validated
 	
-	@RequestMapping(value = "/list",method = RequestMethod.GET, produces = "text/html;charset=UTF-8")  
+	@RequestMapping(value = "/list", produces = "text/html;charset=UTF-8")  
 	public String list(@RequestParam(required=false) String courseFileName,@RequestParam(required=false) String courseFileCollege,
 			@RequestParam(required=false) String courseFileSubject,Model model){
 		//list.jsp + model = ModelAndView		

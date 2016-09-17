@@ -9,6 +9,7 @@
 <jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
 </head>
 <body>
+
  <div class="navs">
 	<form  class="form-horizontal" role="form" action="list" method="get">
    <div class="form-group">

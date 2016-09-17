@@ -9,7 +9,7 @@
 		into users
 		values(#{userId},#{userName},#{userPassword},#{userSchool},#{userLevel})
 	</insert>
-	<delete id="deleteUsers" parameterType="long">
+	<delete id="deleteUsers" parameterType="string">
 		delete
 		from users
 		where
@@ -31,12 +31,12 @@
 		where user_name =
 		#{userName}
 	</select>
-	<select id="searchUsers" resultType="Users" parameterType="long">
+	<select id="searchUsers" resultType="Users" >
 		select user_id,user_name,user_school,user_level
 		from
 		users
 	</select>
-	<select id="findUserById" resultType="Users" parameterType="long">
+	<select id="findUserById" resultType="Users" parameterType="string">
 		select user_id,user_name,user_school,user_level
 		from users
 		where user_id

@@ -99,7 +99,7 @@ public class UsersDaoTest {
 
 	@Test
 	public void testFindUserById() throws Exception{
-		String userId = "10001";
+		String userId = "08143427";
 		Users user = null;
 		try {
 			user = UsersDao.findUserById(userId);

@@ -25,7 +25,7 @@
 					<li class="active"><a href="/yunkuke/courses/fileQuary">查询</a></li>
 					<li class="active"><a href="/yunkuke/user/login">登陆</a></li>
 					<li class="active"><a href="/yunkuke/user/register">注册</a></li>
-
+					<li class="active"><a href="/yunkuke/user/userInfo">账户信息</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="/yunkuke/user/register"> 关于团队 <span
 							class="caret"></span>
@@ -35,6 +35,7 @@
 							<li class="divider"></li>
 							<li><a href="#">联系客服</a></li>
 						</ul></li>
+					<li class="btn btn-info" ><a href="/yunkuke/user/logout" target="_blank">退出</a>
 				</ul>
 			</div>
 		</div>
@@ -44,7 +45,7 @@
 	<style type="text/css">
 	.navs{
 	postion: absolute;
-	margin: 100px 100px
+	margin: 300px 300px
 	};
 	</style>
 
