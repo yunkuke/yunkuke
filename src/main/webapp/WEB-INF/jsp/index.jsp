@@ -4,7 +4,6 @@
 <html>
 <head>
 <title>云库课</title>
-<%@include file="common/head.jsp"%>
 </head>
 <body>
 

@@ -7,6 +7,7 @@
 <%@include file="common/head.jsp"%>
 </head>
 <body>
+<div class="navs">
 	<form method="post" action="doFileUpload" enctype="multipart/form-data">
 
 		<div class="form-group">
@@ -58,16 +59,10 @@
 				</label>
 			</div>
 
-
-
-
-
-
-
 			<button type="submit" class="btn btn-default">提交</button>
 	</form>
 
-
+</div>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 

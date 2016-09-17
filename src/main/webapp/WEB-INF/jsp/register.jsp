@@ -5,9 +5,10 @@
 <head>
 <title>用户注册</title>
 <%@include file="common/head.jsp"%>
+<jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
 </head>
 <body>
-
+<div class="navs">
 	<form method="post" class="form-horizontal" role="form" action="doRegister">
 		<div class="form-group">
 			<label class="col-sm-2 control-label">学号</label>
@@ -46,12 +47,11 @@
 			
 		<div align="center">
 			<label class="col-sm-2 control-label">用户类型</label>
-			<div class="radio">
+			<div class="radio" align="left">
 				<label> <input type="radio" name="userLevel" id="sdutent"
 					value="0" checked> 学生
 				</label>
-			</div>
-			<div class="radio">
+			
 				<label> <input type="radio" name="userLevel" id="teacher"
 					value="1"> 教师
 				</label>
@@ -71,5 +71,6 @@
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script
 		src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>

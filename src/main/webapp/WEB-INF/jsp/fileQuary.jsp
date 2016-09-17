@@ -1,13 +1,16 @@
-<%@page contentType="text/html; charset=UTF-8" language="java"%>
+<%@page contentType="text/html; charset=UTF-8" language="java"  pageEncoding="UTF-8"%>
 <%@include file="common/tag.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
+
 <title>fileQuary</title>
 <%@include file="common/head.jsp"%>
+<jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
 </head>
 <body>
-	<form  class="form-horizontal" role="form" action="list">
+ <div class="navs">
+	<form  class="form-horizontal" role="form" action="list" method="get">
    <div class="form-group">
       <label for="firstname" class="col-sm-2 control-label">根据文件名查询</label>
       <div class="col-sm-10">
@@ -34,7 +37,7 @@
 	</div>
    </form>
 
-
+</div>
 <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 

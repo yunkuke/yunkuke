@@ -7,7 +7,9 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.List;
 import java.util.Properties;
 
@@ -17,6 +19,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.sound.midi.SoundbankResource;
 
 import org.apache.commons.io.FileUtils;
+
+import cn.yunkuke.dto.JSONResult;
 import cn.yunkuke.entity.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +32,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import cn.yunkuke.entity.CourseFile;
@@ -50,23 +55,29 @@ public class CourseFileController {
 	private UsersService usersService;
 	
 	//@Validated
+	
 	@RequestMapping(value = "/list",method = RequestMethod.GET, produces = "text/html;charset=UTF-8")  
-	public String list(@RequestParam String courseFileName,@RequestParam String courseFileCollege,
-			@RequestParam String courseFileSubject,Model model){
-		//list.jsp + model = ModelAndView
-		
+	public String list(@RequestParam(required=false) String courseFileName,@RequestParam(required=false) String courseFileCollege,
+			@RequestParam(required=false) String courseFileSubject,Model model){
+		//list.jsp + model = ModelAndView		
 		List<CourseFile> list = null;
-		//courseFileService.getCourseFileList();
-		if(courseFileName==""&&courseFileCollege==""&&courseFileSubject==""){
+		//courseFileService.getCourseFileList();						
+		if(courseFileName==null&&courseFileCollege==null&&courseFileSubject==null){
+			list = courseFileService.getCourseFileList();
+		}
+		else if(courseFileName==""&&courseFileCollege==""&&courseFileSubject==""){
 			list = courseFileService.getCourseFileList();
 		}
 		else if(courseFileName!=""){
+			courseFileName=URLDecoder.decode(courseFileName);
 			 list = courseFileService.getCourseFileByName(courseFileName);		
 			}
 		else if(courseFileCollege!=""){
+			courseFileCollege=URLDecoder.decode(courseFileCollege);
 			list = courseFileService.getCourseFileByCollege(courseFileCollege);
 		}
 		else if(courseFileSubject!=""){
+			courseFileSubject=URLDecoder.decode(courseFileSubject);
 			list = courseFileService.getCourseFileBySubject(courseFileSubject);
 		}
 		LOG.info(courseFileName);
@@ -77,6 +88,15 @@ public class CourseFileController {
 //		model.addAttribute("list",list);
 //		return "list"; // WEB-INF/JSP/"list".jsp
 	}
+	
+	//获得全部课程的json 无参数传入  实际使用时method改为post，无法通过url直接访问
+	@RequestMapping(value = "/listjson",method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
+	@ResponseBody
+    public JSONResult<List> execute(Model model) {
+		List<CourseFile> list = null;
+		list = courseFileService.getCourseFileList();
+        return new JSONResult<List>(true,list);
+    }
 	@RequestMapping(value = "/fileQuary")
 	public String fileQuary(){
 		return "fileQuary";
@@ -203,7 +223,7 @@ public class CourseFileController {
 		 
 		 courseFileService.increaseGoodpoint(courseFileId);
 		
-        return "list";
+        return "forward:/courses/list";
     }
 
 }

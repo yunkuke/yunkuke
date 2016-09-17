@@ -5,8 +5,10 @@
 <head>
 <title>课程文件列表</title>
 <%@include file="common/head.jsp"%>
+<jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
 </head>
 <body>
+<div class="navs">
 	<div class="container">
 		<div class="panel panel-default">
 			<div class="panel-heading text-center">
@@ -40,7 +42,7 @@
 									target="_blank">下载</a></td>
 								<td><a class="btn btn-info"
 									href="/yunkuke/courses/${cf.courseFileId}/goodpoint"
-									target="_blank">点赞</a></td>
+									target="_blank" >点赞</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -49,7 +51,7 @@
 			</div>
 		</div>
 	</div>
-
+</div>
 
 
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->

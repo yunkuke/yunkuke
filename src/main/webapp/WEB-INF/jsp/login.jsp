@@ -5,7 +5,8 @@
 <head>
 <title>云库课-登录</title>
 <%@include file="common/head.jsp"%>
-
+<jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
+<!--  
 <style type="text/css">
 body {
 	margin: 0;
@@ -17,7 +18,7 @@ body {
 	line-height: 1;
 	
 	<!-- TODO背景图片 -->
-	
+<!--  	
 	background-image: url("../resources/login2.png");
 	background-position: left left;
 	background-size: cover;
@@ -88,12 +89,14 @@ body {
 		rgba(255, 255, 255, 0.6);
 }
 </style>
+-->
 </head>
 <body>
+<div class="navs">
 	<div align="center">
 
 		<form method="post" action="doLogin" class="login">
-			<h1>登录云库课<%=request.getContextPath()%></h1>
+			<h1>登录云库课</h1>
 			<div class="form-group">
 				
 				<div class="col-sm-10">
@@ -121,5 +124,6 @@ body {
 	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 	<script
 		src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</div>
 </body>
 </html>
