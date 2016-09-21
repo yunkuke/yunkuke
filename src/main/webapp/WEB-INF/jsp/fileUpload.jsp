@@ -1,10 +1,11 @@
 <%@page contentType="text/html; charset=UTF-8" language="java"%>
 <%@include file="common/tag.jsp"%>
+<%@include file="common/head.jsp"%>
+<jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
 <head>
 <title>文件上传</title>
-<%@include file="common/head.jsp"%>
 </head>
 <body>
 <div class="navs">
@@ -50,7 +51,7 @@
 			</div>
 			<div class="radio">
 				<label> <input type="radio" name="courseFileLevel"
-					id="optionsRadios1" value="1" checked> 全部可下载
+					id="optionsRadios1" value="0" checked> 全部可下载
 				</label>
 			</div>
 			<div class="radio">

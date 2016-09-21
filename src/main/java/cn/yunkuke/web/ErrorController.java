@@ -16,8 +16,16 @@ public class ErrorController {
 	
 	
 		@RequestMapping(value = "/noLogin")
-		public String index() {
+		public String noLogin() {
 			return "error/noLogin";
+		}
+		@RequestMapping(value = "/loginFail")
+		public String loginFail() {
+			return "error/loginFail";
+		}
+		@RequestMapping(value = "/noPower")
+		public String noPower() {
+			return "error/noPower";
 		}
 	
 	

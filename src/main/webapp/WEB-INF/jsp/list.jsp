@@ -38,7 +38,7 @@
 								<td>${cf.courseFileGoodpoint}</td>
 								<td>${cf.courseFileUplodeDate}"</td>
 								<td><a class="btn btn-info"
-									href="/yunkuke/courses/${cf.courseFileId}/detail"
+									href="/yunkuke/courses/${cf.courseFileId}/download"
 									target="_blank">下载</a></td>
 								<td><a class="btn btn-info"
 									href="/yunkuke/courses/${cf.courseFileId}/goodpoint"

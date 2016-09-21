@@ -25,20 +25,20 @@
 		parameterType="String">
 		select *
 		from coursefile
-		where courseFile_name =
-		#{courseFileName}
+		where courseFile_name LIKE concat(concat('%',#{courseFileName}),'%')
 	</select>
 	<select id="searchCourseFilesByCollege" resultType="CourseFile">
 		select *
 		from
 		coursefile
-		where courseFile_college = #{courseFileCollege}
+		where courseFile_college LIKE concat(concat('%',#{courseFileCollege}),'%')
 	</select>
 	<select id="searchCourseFilesBySubject" resultType="CourseFile">
+	   
 		select *
 		from
 		coursefile  
-		where courseFile_subject = #{CourseFileSubject}
+		where courseFile_subject LIKE concat(concat('%',#{courseFileSubject}),'%')
 	</select>
 	<update id="increaseGoodpoint">
 		update

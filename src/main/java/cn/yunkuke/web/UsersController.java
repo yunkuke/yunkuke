@@ -38,12 +38,18 @@ public class UsersController {
 	private UsersService usersService;
 
 	@RequestMapping(value = "/login")
-	public String login() {
-		return "login";
+	public String login(HttpServletRequest request) {
+		HttpSession session = request.getSession();
+		String login = (String) session.getAttribute("userId");
+		if (login != null) {
+			return "redirect:/user/userInfo";
+		} else {
+			return "login";
+		}
 	}
 
 	@RequestMapping(value = "/doLogin")
-	public String list(@Validated String userId, @Validated String userPassword, HttpServletRequest request) {
+	public String doLogin(@Validated String userId, @Validated String userPassword, HttpServletRequest request) {
 		// public String list(HttpServletRequest request ) {
 		// String userId = request.getParameter("userId");
 		// String userPassword = request.getParameter("userPassword");
@@ -58,9 +64,11 @@ public class UsersController {
 			if (true == state) {
 				HttpSession session = request.getSession();
 				session.setAttribute("userId", userId);
+				Users user = usersService.findUserById(userId);
+				session.setAttribute("userLevel", user.getUserLevel());
 				return "redirect:/courses/list";
 			} else {
-				return "loginFail";
+				return "redirect:../error/loginFail";
 			}
 		}
 	}
@@ -76,8 +84,15 @@ public class UsersController {
 			HttpSession session = request.getSession();
 			String userId = (String) session.getAttribute("userId");
 			Users user = usersService.findUserById(userId);
+			int userLevel =(int)session.getAttribute("userLevel");
+			String ulevel=" ";
+			if (userLevel == 0) {
+				 ulevel = "学生用户";
+			} else {
+				 ulevel = "教师用户";
+			}
+			model.addAttribute("uLevel",ulevel);
 			model.addAttribute("userInfo", user);
-			System.out.println(user.toString());
 			return "userInfo";
 		} catch (Exception e) {
 			return "redirect:../error/noLogin";

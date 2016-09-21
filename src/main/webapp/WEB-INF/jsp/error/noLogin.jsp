@@ -7,9 +7,11 @@
 <head>
 
 <title>Insert title here</title>
+
 </head>
 <body>
 <div class="navs">
+<img  src="/yunkuke/resources/imgs/noLoginError.jpg"/>
 	请登陆后再试。
 </div>
 </body>

@@ -27,10 +27,10 @@
       </div>
    </div>
    <div class="form-group">
-      <label for="firstname" class="col-sm-2 control-label">根据课程全名查询</label>
+      <label for="firstname" class="col-sm-2 control-label">根据课程名查询</label>
       <div class="col-sm-10">
          <input type="text" class="form-control" id="firstname" name="courseFileSubject"
-            placeholder="请输入课程全名">
+            placeholder="请输入课程名">
       </div>
    </div>
    <div align="center">

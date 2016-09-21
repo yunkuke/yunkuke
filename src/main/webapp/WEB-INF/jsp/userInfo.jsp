@@ -27,8 +27,9 @@
 								<td>${userInfo.userId}</td>
 								<td>${userInfo.userName}</td>
 								<td>${userInfo.userSchool}</td>
-								<td>${userInfo.userLevel}</td>
+								<td>${uLevel}</td>
 							</tr>
+							
 						
 					</tbody>
 				</table>

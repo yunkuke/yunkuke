@@ -22,6 +22,7 @@ import org.apache.commons.io.FileUtils;
 
 import cn.yunkuke.dto.JSONResult;
 import cn.yunkuke.entity.*;
+import cn.yunkuke.until.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,7 @@ import org.springframework.web.multipart.MultipartFile;
 import cn.yunkuke.entity.CourseFile;
 import cn.yunkuke.service.CourseFileService;
 import cn.yunkuke.service.UsersService;
+import cn.yunkuke.until.SessionUntil;
 
 /** 
 * @author zqb on 2016年7月28日 
@@ -53,6 +55,8 @@ public class CourseFileController {
 	private CourseFileService courseFileService;
 	@Autowired
 	private UsersService usersService;
+	
+	SessionUntil sessionUntil = new SessionUntil();
 	
 	//@Validated
 	
@@ -124,15 +128,16 @@ public class CourseFileController {
 	@RequestMapping(value = "/doFileUpload")  
 	public String doFileUpload(@RequestParam("courseFile") MultipartFile file,
 			HttpServletRequest request,Model model) throws IOException{
+		if(!sessionUntil.isNull(request)&&sessionUntil.getSessionLevel(request)==1){
 		if(!file.isEmpty()){
 			
 			LOG.info("process file{}",file.getOriginalFilename());
 //			String userId,  String courseFileCollege,
 //			int courseFileGoodpoint, String courseFilePath, String courseFileImgpath, int courseFileLevel);
 			//本机测试地址
-			String despath = "g:\\"+sepa+"data"+sepa+"yunkuke";
+			//String despath = "g:\\"+sepa+"data"+sepa+"yunkuke";
 			//服务器地址
-			//String despath = sepa+"data"+sepa+"yunkuke";
+			String despath = sepa+"data"+sepa+"yunkuke";
 			String userId="nnull";
 			String courseFileName = file.getOriginalFilename().replaceAll(" ", "");
 			String courseFileCollege =request.getParameter("courseFileCollege");
@@ -149,7 +154,9 @@ public class CourseFileController {
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(syspath,enc(courseFileName)));
 		}
 		
-		return "success"; 
+		return "success"; }else{
+			return "redirect:/error/noPower";
+		}
 	}
 	/**
 	 * 文件下载
@@ -161,9 +168,10 @@ public class CourseFileController {
 	 * @throws IOException
 	 */
 	@SuppressWarnings("deprecation")
-	@RequestMapping(value = "/{courseFileId}/detail",method = RequestMethod.GET) 
+	@RequestMapping(value = "/{courseFileId}/download",method = RequestMethod.GET) 
     public String detail(HttpServletRequest request,  
     	      HttpServletResponse response,@PathVariable("courseFileId") Long courseFileId ,Model model) throws IOException{
+		
 		if(courseFileId==null){
 			return "redirect:/courses/list";
 		}
@@ -173,11 +181,12 @@ public class CourseFileController {
 			return "redirect:/courses/list";
 		}
 		CourseFile course =courseFileService.getCourseFileById(courseFileId);
+		if(!sessionUntil.isNull(request)&&sessionUntil.getSessionLevel(request)>=courseFile.getCourseFileLevel()){
 		response.setContentType("application/x-download"); 
 		//本机测试地址
-		String courseFilePath1 = "g:\\"+sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
+		//String courseFilePath1 = "g:\\"+sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
 		//服务器地址
-		//String courseFilePath1 = sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
+		String courseFilePath1 = sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
 		LOG.info(sepa+"data"+sepa+"yunkuke"+sepa+course.getCourseFileCollege()+course.getCourseFileSubject()+sepa+course.getCourseFileName());
 		LOG.info(courseFilePath1);  
 //		response.addHeader("Content-Disposition","attachment;filename=" + courseFile.getCourseFileName());   
@@ -207,7 +216,10 @@ public class CourseFileController {
 	    //关闭流
 	    bis.close();  
 	    bos.close();  
-        return "detail";
+        return "download";
+        }else{
+        	return "redirect:/error/noPower";
+        }
     }
 	@RequestMapping(value = "/{courseFileId}/goodpoint",method = RequestMethod.GET) 
     public String doGoodpoint(HttpServletRequest request,  

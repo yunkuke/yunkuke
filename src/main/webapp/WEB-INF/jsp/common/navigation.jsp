@@ -11,21 +11,61 @@
 <script
 	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <title>导航</title>
+<style type="text/css">
+.header-logo {
+	width: 125px;
+	height: 45px;
+	margin-top: 7px;
+	margin-left: 15%;
+}
+
+.header-nav {
+	float: right;
+}
+
+.header-nav li a {
+	font-weight: 900;
+}
+</style>
 </head>
 <body>
 
 	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#">导航栏</a>
+				<div class="header-logo">
+					<a href="/yunkuke/user/login"><img
+						src="/yunkuke/resources/imgs/logo.png" alt=""></a>
+				</div>
 			</div>
-			<div>
+			<div class="header-nav">
 				<ul class="nav navbar-nav">
-					<li class="active"><a href="/yunkuke/courses/list">文件列表</a></li>
-					<li class="active"><a href="/yunkuke/courses/fileQuary">查询</a></li>
-					<li class="active"><a href="/yunkuke/user/login">登陆</a></li>
-					<li class="active"><a href="/yunkuke/user/register">注册</a></li>
-					<li class="active"><a href="/yunkuke/user/userInfo">账户信息</a></li>
+					<li class="actives"><a href="/yunkuke/courses/list">文件列表</a></li>
+					<li class="actives"><a href="/yunkuke/courses/fileQuary">查询</a></li>
+					<%
+					if (session.getAttribute("userLevel")!=null && 1 == (int) session.getAttribute("userLevel")) {
+					%>	
+						<li class="actives"><a href="/yunkuke/courses/fileUpload">上传</a></li>
+					<%}%>
+					
+					
+					<%
+						String login = (String) session.getAttribute("userId");
+						if (null == login) {
+							
+					%>
+					
+					
+					<li class="actives"><a href="/yunkuke/user/login">登陆</a></li>
+					<li class="actives"><a href="/yunkuke/user/register">注册</a></li>
+					<%
+						}
+					%>
+
+
+
+
+					<li class="actives"><a href="/yunkuke/user/userInfo">账户信息</a></li>
 					<li class="dropdown"><a class="dropdown-toggle"
 						data-toggle="dropdown" href="/yunkuke/user/register"> 关于团队 <span
 							class="caret"></span>
@@ -35,19 +75,21 @@
 							<li class="divider"></li>
 							<li><a href="#">联系客服</a></li>
 						</ul></li>
-					<li class="btn btn-info" ><a href="/yunkuke/user/logout" target="_blank">退出</a>
+					<li class="btn btn-info"><a href="/yunkuke/user/logout"
+						target="_blank">退出</a>
 				</ul>
 			</div>
 		</div>
 	</nav>
-	
-	
+
+
 	<style type="text/css">
-	.navs{
+.navs {
 	postion: absolute;
 	margin: 300px 300px
-	};
-	</style>
+}
+;
+</style>
 
 
 

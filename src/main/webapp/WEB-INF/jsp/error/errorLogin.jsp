@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<img src=".../resources/imgs/noLoginError.jpg"/>
 	用户名或密码错误。
 </body>
 </html>
