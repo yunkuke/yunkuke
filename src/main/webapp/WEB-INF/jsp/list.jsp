@@ -2,12 +2,14 @@
 <%@include file="common/tag.jsp"%>
 <%@include file="common/head.jsp"%>
 <jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
+<jsp:include flush = "true" page="fileQuary.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
 <head>
 <title>课程文件列表</title>
 </head>
 <body>
+<section class="subs">
 <div class="navs">
 	<div class="container">
 		<div class="panel panel-default">
@@ -22,9 +24,11 @@
 							<th>名称</th>
 							<th>学院</th>
 							<th>课程名</th>
+							<th>大小</th>
 							<th>点赞量</th>
 							<th>上传时间</th>
 							<th>下载</th>
+							<th>预览</th>
 							<th>点赞</th>
 						</tr>
 					</thead>
@@ -32,17 +36,23 @@
 						<c:forEach items="${list}" var="cf">
 							<tr>
 								<td>${cf.courseFileId}</td>
-								<td>${cf.courseFileName}</td>
+								<td><a class="btn btn-info"
+									href="http://ow365.cn/?i=10787&furl=http://yunkuke.cn/yunkuke/courses/${cf.courseFileId}/download"
+								>${cf.courseFileName}</a></td>
 								<td>${cf.courseFileCollege}</td>
 								<td>${cf.courseFileSubject}</td>
+								<td><fmt:formatNumber type="number" value="${cf.courseFileSize/1024}" maxFractionDigits="0"/>&nbsp;KB</td>
 								<td>${cf.courseFileGoodpoint}</td>
 								<td>${cf.courseFileUplodeDate}"</td>
 								<td><a class="btn btn-info"
 									href="/yunkuke/courses/${cf.courseFileId}/download"
-									target="_blank">下载</a></td>
+								>下载</a></td>
+								<td><a class="btn btn-info"
+									href="http://ow365.cn/?i=10787&furl=http://yunkuke.cn/yunkuke/courses/${cf.courseFileId}/download"
+								>预览</a></td>								
 								<td><a class="btn btn-info"
 									href="/yunkuke/courses/${cf.courseFileId}/goodpoint"
-									target="_blank" >点赞</a></td>
+									 >点赞</a></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -52,8 +62,8 @@
 		</div>
 	</div>
 </div>
-
-
+</section>
+<%@include file="common/footer.jsp"%>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 

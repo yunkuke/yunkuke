@@ -1,105 +1,63 @@
 <%@page contentType="text/html; charset=UTF-8" language="java"%>
-<%@include file="tag.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <%@include file="head.jsp"%>
-<link rel="stylesheet"
-	href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css">
-<script
-	src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
-<script
-	src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-<title>导航</title>
-<style type="text/css">
-.header-logo {
-	width: 125px;
-	height: 45px;
-	margin-top: 7px;
-	margin-left: 15%;
-}
-
-.header-nav {
-	float: right;
-}
-
-.header-nav li a {
-	font-weight: 900;
-}
-</style>
+<title>云库课</title>
 </head>
 <body>
-
-	<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<div class="header-logo">
-					<a href="/yunkuke/user/login"><img
-						src="/yunkuke/resources/imgs/logo.png" alt=""></a>
+<div class="navbar-wrapper">
+	<div class="container">
+		<nav class="navbar navbar-inverse navbar-static-top cl-effect-5">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="/yunkuke/index.html"><h1>云库课 </h1></a>
 				</div>
-			</div>
-			<div class="header-nav">
-				<ul class="nav navbar-nav">
-					<li class="actives"><a href="/yunkuke/courses/list">文件列表</a></li>
-					<li class="actives"><a href="/yunkuke/courses/fileQuary">查询</a></li>
-					<%
+				<div id="navbar" class="navbar-collapse collapse">
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="/yunkuke/index.htm">首页</a></li>
+						<li><a href="/yunkuke/about.htm">团队介绍</a><span class="line1">/</span></li>
+						<%
 					if (session.getAttribute("userLevel")!=null && 1 == (int) session.getAttribute("userLevel")) {
 					%>	
-						<li class="actives"><a href="/yunkuke/courses/fileUpload">上传</a></li>
+						<li><a href="/yunkuke/courses/fileUpload">上传课件</a><span class="line1">/</span></li>
 					<%}%>
+						
 					
-					
-					<%
+						<li><a href="/yunkuke/courses/list">课件中心</a><span class="line1">/</span></li>
+						<%
+					if (session.getAttribute("userLevel")!=null ) {
+					%>	
+						<li><a href="/yunkuke/user/userInfo">个人中心</a><span class="line1">/</span></li>
+						<li><a href="/yunkuke/user/logout">注销</a><span class="line1">/</span></li>
+						
+					<%}%>
+						
+							<%
 						String login = (String) session.getAttribute("userId");
 						if (null == login) {
-							
-					%>
+						%>
 					
 					
-					<li class="actives"><a href="/yunkuke/user/login">登陆</a></li>
-					<li class="actives"><a href="/yunkuke/user/register">注册</a></li>
+					<li><a href="/yunkuke/user/login">登录</a><span class="line1">/</span></li>
+					<li><a href="/yunkuke/user/register">注册</a><span class="line1">/</span></li>
 					<%
 						}
 					%>
-
-
-
-
-					<li class="actives"><a href="/yunkuke/user/userInfo">账户信息</a></li>
-					<li class="dropdown"><a class="dropdown-toggle"
-						data-toggle="dropdown" href="/yunkuke/user/register"> 关于团队 <span
-							class="caret"></span>
-					</a>
-						<ul class="dropdown-menu">
-							<li><a href="#">团队介绍</a></li>
-							<li class="divider"></li>
-							<li><a href="#">联系客服</a></li>
-						</ul></li>
-					<li class="btn btn-info"><a href="/yunkuke/user/logout"
-						target="_blank">退出</a>
-				</ul>
+					</ul>
+				</div>
 			</div>
-		</div>
-	</nav>
+		</nav>
+	</div>
+</div>
+<section class="innerpage-banner"> </section>
 
 
-	<style type="text/css">
-.navs {
-	postion: absolute;
-	margin: 300px 300px
-}
-;
-</style>
-
-
-
-
-
-	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
-
-	<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-	<script
-		src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -25,32 +25,38 @@ public class UsersServiceImpl implements UsersService {
 	@Autowired
 	private UsersDao usersDao;
 	
+	@Override
 	public boolean register(String userId, String userName, String userPassword, String userSchool, int userLevel) {
 		
 		return usersDao.insertUsers(userId, userName, userPassword, userSchool, userLevel);
 	}
 
+	@Override
 	public boolean login(String userId, String userPassword) {
 		Users user = usersDao.checkLogin(userId, userPassword);
 		if(user!=null) return true;
 		else return false;
 	}
 
+	@Override
 	public boolean changeUserPassword(String userId, String userPassword) {
 		
 		return usersDao.changeUsersPassword(userId, userPassword);
 	}
 
+	@Override
 	public Users findUserById(String userId) {
 		
 		return usersDao.findUserById(userId);
 	}
 
+	@Override
 	public 	List<Users> findUserByName(String userName) {
 		
 		return usersDao.searchUsersByUsername(userName);
 	}
 
+	@Override
 	public List<Users> listUsersAll() {
 		
 		return usersDao.searchUsers();

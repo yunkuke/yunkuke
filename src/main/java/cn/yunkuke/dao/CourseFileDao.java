@@ -1,7 +1,5 @@
 package cn.yunkuke.dao;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -27,10 +25,10 @@ public interface CourseFileDao {
 			 @Param("courseFileSubject") String courseFileSubject,@Param("courseFileGoodpoint") int courseFileGoodpoint, @Param("courseFilePath") String courseFilePath,
 			@Param("courseFileImgpath") String courseFileImgpath, @Param("courseFileLevel") int courseFileLevel);
 	/**
-	 * 列出所有文件
+	 * 根据条件联合查询文件
 	 * @return
 	 */
-	public List<CourseFile> findCourseFileAll();
+	public List<CourseFile> fileQuary(CourseFile coursefile);
 
 	/**
 	 * 根据文件ID查找
@@ -39,28 +37,28 @@ public interface CourseFileDao {
 	 * @return
 	 */
 	public CourseFile findCourseFileById(long courseFileId);
-
-	/**
-	 * 根据文件名查找
-	 * 
-	 * @param courseFileName
-	 * @return
-	 */
-	public List<CourseFile> findCourseFileByName(String courseFileName);
-
-	/**
-	 * 根据文件所属学院查找
-	 * 
-	 * @param courseFileCollege
-	 * @return
-	 */
-	public ArrayList<CourseFile> searchCourseFilesByCollege(String courseFileCollege);
-	/**
-	 * 根据文件所属课程查找
-	 * @param CourseFileSubject
-	 * @return
-	 */
-	public ArrayList<CourseFile> searchCourseFilesBySubject(String CourseFileSubject);
+//
+//	/**
+//	 * 根据文件名查找
+//	 * 
+//	 * @param courseFileName
+//	 * @return
+//	 */
+//	public List<CourseFile> findCourseFileByName(String courseFileName);
+//
+//	/**
+//	 * 根据文件所属学院查找
+//	 * 
+//	 * @param courseFileCollege
+//	 * @return
+//	 */
+//	public ArrayList<CourseFile> searchCourseFilesByCollege(String courseFileCollege);
+//	/**
+//	 * 根据文件所属课程查找
+//	 * @param CourseFileSubject
+//	 * @return
+//	 */
+//	public ArrayList<CourseFile> searchCourseFilesBySubject(String CourseFileSubject);
 	/**
 	 * 点赞
 	 * 

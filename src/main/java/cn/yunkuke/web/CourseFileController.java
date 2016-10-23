@@ -4,31 +4,25 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.net.URLEncoder;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Properties;
+import java.util.Map;
+import java.util.Set;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.sound.midi.SoundbankResource;
-
 import org.apache.commons.io.FileUtils;
 
 import cn.yunkuke.dto.JSONResult;
-import cn.yunkuke.entity.*;
-import cn.yunkuke.until.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -59,33 +53,56 @@ public class CourseFileController {
 	SessionUntil sessionUntil = new SessionUntil();
 	
 	//@Validated
-	
+
 	@RequestMapping(value = "/list", produces = "text/html;charset=UTF-8")  
 	public String list(@RequestParam(required=false) String courseFileName,@RequestParam(required=false) String courseFileCollege,
-			@RequestParam(required=false) String courseFileSubject,Model model){
+			@RequestParam(required=false) String courseFileSubject,@RequestParam(required=false,defaultValue="null") String fileQuaryStr,Model model){
 		//list.jsp + model = ModelAndView		
 		List<CourseFile> list = null;
+	//	Set<Long> set=new HashSet<Long>();
+		Map<Long, CourseFile> courseFileMap = new HashMap<>();
+		if(!"null".equals(fileQuaryStr)){
+		list=courseFileService.getCourseFileList(fileQuaryStr, null, null);
+		list.addAll(courseFileService.getCourseFileList(null, fileQuaryStr, null));
+		list.addAll(courseFileService.getCourseFileList(null, null, fileQuaryStr));
+		//Set<CourseFile> set = new HashSet<CourseFile>(list);
+		for(int i=0,size=list.size();i<size;i++){
+			courseFileMap.put(list.get(i).getCourseFileId(), list.get(i));
+		}
+		list.clear();
+		//for(int i=0;i<courseFileMap.size();i++){
+			list.addAll(courseFileMap.values());
+		//}
+		//list.addAll();
+	    System.out.println(list.size());
+		}
+		else{
+		list=courseFileService.getCourseFileList(courseFileName, courseFileCollege, courseFileSubject);
+		}
 		//courseFileService.getCourseFileList();						
-		if(courseFileName==null&&courseFileCollege==null&&courseFileSubject==null){
-			list = courseFileService.getCourseFileList();
-		}
-		else if(courseFileName==""&&courseFileCollege==""&&courseFileSubject==""){
-			list = courseFileService.getCourseFileList();
-		}
-		else if(courseFileName!=""){
-			courseFileName=URLDecoder.decode(courseFileName);
-			 list = courseFileService.getCourseFileByName(courseFileName);		
-			}
-		else if(courseFileCollege!=""){
-			courseFileCollege=URLDecoder.decode(courseFileCollege);
-			list = courseFileService.getCourseFileByCollege(courseFileCollege);
-		}
-		else if(courseFileSubject!=""){
-			courseFileSubject=URLDecoder.decode(courseFileSubject);
-			list = courseFileService.getCourseFileBySubject(courseFileSubject);
-		}
-		LOG.info(courseFileName);
-		LOG.info(courseFileCollege);
+//		if(courseFileName==null&&courseFileCollege==null&&courseFileSubject==null){
+//			list = courseFileService.getCourseFileList();
+//		}
+//		else if(courseFileName==""&&courseFileCollege==""&&courseFileSubject==""){
+//			list = courseFileService.getCourseFileList();
+//		}
+//		else if(courseFileName!=""){
+//			courseFileName=URLDecoder.decode(courseFileName);
+//			 list = courseFileService.getCourseFileByName(courseFileName);		
+//			}
+//		else if(courseFileCollege!=""){
+//			courseFileCollege=URLDecoder.decode(courseFileCollege);
+//			list = courseFileService.getCourseFileByCollege(courseFileCollege);
+//		}
+//		else if(courseFileSubject!=""){
+//			courseFileSubject=URLDecoder.decode(courseFileSubject);
+//			list = courseFileService.getCourseFileBySubject(courseFileSubject);
+//		}
+		LOG.info("fileQuaryStr"+fileQuaryStr);
+		LOG.info("courseFileName  "+courseFileName);
+		LOG.info("courseFileCollege  "+courseFileCollege);
+		LOG.info("courseFileSubject  "+courseFileSubject);
+		LOG.info("list  "+list);
 		model.addAttribute("list",list);
 		return "list";
 //		List<CourseFile> list = courseFileService.getCourseFileList();
@@ -135,29 +152,36 @@ public class CourseFileController {
 //			String userId,  String courseFileCollege,
 //			int courseFileGoodpoint, String courseFilePath, String courseFileImgpath, int courseFileLevel);
 			//本机测试地址
-			//String despath = "g:\\"+sepa+"data"+sepa+"yunkuke";
+//			String despath = "g:\\"+sepa+"data"+sepa+"yunkuke";
 			//服务器地址
-			String despath = sepa+"data"+sepa+"yunkuke";
-			String userId="nnull";
+			StringBuilder despath = new StringBuilder().append(sepa).append("data").append(sepa).append("yunkuke");
+			String userId=sessionUntil.getSessionID(request);
+			System.out.println(userId);
 			String courseFileName = file.getOriginalFilename().replaceAll(" ", "");
 			String courseFileCollege =request.getParameter("courseFileCollege");
 			String courseFileSubject = request.getParameter("courseFileSubject");
 			long courseFileSize = file.getSize();
 			int courseFileGoodpoint=0;
-			String courseFilePath=despath+sepa+courseFileCollege+sepa+courseFileSubject;
+			StringBuilder courseFilePath=new StringBuilder().append(despath.toString())
+					.append(sepa).append(courseFileCollege)
+					.append(sepa).append(courseFileSubject);
 			String courseFileImgpath="todo";
 			Integer courseFileLevel =Integer.valueOf(request.getParameter("courseFileLevel"));
 			model.addAttribute("courseFileSize",courseFileSize);
-			courseFileService.insertFile(userId, courseFileName, courseFileSize, courseFileCollege, courseFileSubject,courseFileGoodpoint, courseFilePath, courseFileImgpath, courseFileLevel);
+			courseFileService.insertFile(userId, courseFileName, courseFileSize, courseFileCollege,
+					courseFileSubject,courseFileGoodpoint, courseFilePath.toString(), courseFileImgpath, courseFileLevel);
 			//转码后真实文件地址
-			String syspath=despath+sepa+enc(courseFileCollege)+sepa+enc(courseFileSubject);
-			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(syspath,enc(courseFileName)));
+			StringBuilder syspath=new StringBuilder().append(despath.toString()).append(sepa).append(enc(courseFileCollege)).
+					append(sepa).append(enc(courseFileSubject));
+			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(syspath.toString(),enc(courseFileName)));
 		}
 		
 		return "success"; }else{
 			return "redirect:/error/noPower";
 		}
 	}
+	
+	
 	/**
 	 * 文件下载
 	 * @param request
@@ -169,32 +193,36 @@ public class CourseFileController {
 	 */
 	@SuppressWarnings("deprecation")
 	@RequestMapping(value = "/{courseFileId}/download",method = RequestMethod.GET) 
-    public String detail(HttpServletRequest request,  
+    public String download(HttpServletRequest request,  
     	      HttpServletResponse response,@PathVariable("courseFileId") Long courseFileId ,Model model) throws IOException{
 		
 		if(courseFileId==null){
-			return "redirect:/courses/list";
+			return "redirect:/error/404Error";
 		}
 		CourseFile courseFile = courseFileService.getCourseFileById(courseFileId);
 		
 		if(courseFile == null){
-			return "redirect:/courses/list";
+			return "redirect:/error/404Error";
 		}
 		CourseFile course =courseFileService.getCourseFileById(courseFileId);
-		if(!sessionUntil.isNull(request)&&sessionUntil.getSessionLevel(request)>=courseFile.getCourseFileLevel()){
+//		if(!sessionUntil.isNull(request)&&sessionUntil.getSessionLevel(request)>=courseFile.getCourseFileLevel()){
 		response.setContentType("application/x-download"); 
-		//本机测试地址
-		//String courseFilePath1 = "g:\\"+sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
-		//服务器地址
-		String courseFilePath1 = sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
-		LOG.info(sepa+"data"+sepa+"yunkuke"+sepa+course.getCourseFileCollege()+course.getCourseFileSubject()+sepa+course.getCourseFileName());
-		LOG.info(courseFilePath1);  
-//		response.addHeader("Content-Disposition","attachment;filename=" + courseFile.getCourseFileName());   
-		model.addAttribute("courseFilePath1",courseFilePath1);
-	    
-	    //获取下载文件露肩
-	    String downLoadPath = courseFilePath1;  
-	  
+//		//本机测试地址
+//		String courseFilePath1 = "g:\\"+sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
+//		//服务器地址
+		StringBuilder courseFilePath1 = new StringBuilder().append(sepa).append("data").append(sepa).append("yunkuke")
+				.append(sepa).append(enc(course.getCourseFileCollege())).append(sepa+enc(course.getCourseFileSubject()))
+				.append(sepa+enc(course.getCourseFileName()));
+//		LOG.info(sepa+"data"+sepa+"yunkuke"+sepa+course.getCourseFileCollege()+course.getCourseFileSubject()+sepa+course.getCourseFileName());
+//		LOG.info(courseFilePath1);  
+		response.addHeader("Content-Disposition","attachment;filename=" + courseFile.getCourseFileName()); 
+//		courseFilePath1="http://ow365.cn/?i=10787&furl="+"http://119.29.75.25/yunkuke/courses/"+courseFileId+"/download";
+		model.addAttribute("courseFilePath1",courseFilePath1.toString());
+//		System.out.println(courseFilePath1.toString());
+//	    
+//	    //获取下载文件露肩
+	    String downLoadPath = courseFilePath1.toString();
+//	  
 	    //获取文件的长度
 	    long fileLength = new File(downLoadPath).length();  
 
@@ -214,12 +242,15 @@ public class CourseFileController {
 	      bos.write(buff, 0, bytesRead);  
 	    }  
 	    //关闭流
+	   
 	    bis.close();  
 	    bos.close();  
-        return "download";
-        }else{
-        	return "redirect:/error/noPower";
-        }
+	  
+	    	    
+        return null;
+//        }else{
+//        	return "redirect:/error/noPower";
+//        }
     }
 	@RequestMapping(value = "/{courseFileId}/goodpoint",method = RequestMethod.GET) 
     public String doGoodpoint(HttpServletRequest request,  
@@ -237,5 +268,4 @@ public class CourseFileController {
 		
         return "forward:/courses/list";
     }
-
 }

@@ -1,19 +1,14 @@
 package cn.yunkuke.dao;
 
-import static org.junit.Assert.*;
-
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import cn.yunkuke.entity.CourseFile;
 import cn.yunkuke.entity.Users;
 
 /** 

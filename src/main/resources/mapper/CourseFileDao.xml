@@ -10,9 +10,18 @@
 		values(0,#{userId},#{courseFileName},#{courseFileSize},#{courseFileCollege},#{courseFileSubject},now(),
 		#{courseFileGoodpoint},#{courseFilePath},#{courseFileImgpath},#{courseFileLevel})
 	</insert>
-	<select id="findCourseFileAll" resultType="CourseFile">
+	<select id="fileQuary" parameterType="CourseFile" resultType="CourseFile">
 		select *
-		from coursefile
+		from coursefile where 1=1
+		<if test="courseFileName !=null and ! &quot;&quot;.equals(courseFileName.trim())">
+	    and courseFile_name LIKE concat(concat('%',#{courseFileName}),'%')
+	</if>
+	<if test="courseFileCollege !=null and ! &quot;&quot;.equals(courseFileCollege.trim())">
+	    and courseFile_college LIKE concat(concat('%',#{courseFileCollege}),'%')
+	</if>
+	<if test="courseFileSubject !=null and ! &quot;&quot;.equals(courseFileSubject.trim())">
+	    and courseFile_subject LIKE concat(concat('%',#{courseFileSubject}),'%')
+	</if>
 	</select>
 	<select id="findCourseFileById" resultType="CourseFile"
 		parameterType="long">

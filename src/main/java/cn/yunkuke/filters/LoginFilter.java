@@ -38,7 +38,8 @@ public class LoginFilter implements Filter {
 		if(session.getAttribute("userId")!=null){
 			arg2.doFilter(arg0, arg1);
 		}else{
-			response.sendRedirect("/yunkuke/error/noLogin");
+			arg2.doFilter(arg0, arg1);
+			//response.sendRedirect("/yunkuke/error/noLogin");
 		}
 
 	}

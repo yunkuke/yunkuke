@@ -1,9 +1,5 @@
 package cn.yunkuke.dao;
 
-import static org.junit.Assert.*;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -12,8 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import com.mysql.fabric.xmlrpc.base.Data;
 
 import cn.yunkuke.entity.CourseFile;
 
@@ -32,63 +26,73 @@ public class CourseFileDaoTest {
 
 	@Test
 	public void testInsertCourseFile() {
-		String userId = "10001";
-		String courseFileName = "gaoshu";
-		long courseFileSize = 12121;
-		String courseFileCollege = "lixueyuan";
-		String courseFileSubject = "gaodengshuxue";
-		int courseFileGoodpoint = 0;
-		String courseFilePath = "d://";
-		String courseFileImgpath = "d://";
-		int courseFileLevel = 0;
-		boolean state = CourseFileDao.insertCourseFile(userId, courseFileName, courseFileSize, courseFileCollege,
-				courseFileSubject,courseFileGoodpoint, courseFilePath, courseFileImgpath, courseFileLevel);
-		if (state == true) {
-			System.out.println("添加文件成功");
-		} else {
-			System.out.println("添加文件失败");
-		}
-
-	}
-
-	@Test
-	public void testFindCourseFileAll() {
-		List<CourseFile> c = CourseFileDao.findCourseFileAll();
+//		String userId = "10001";
+//		String courseFileName = "gaoshu";
+//		long courseFileSize = 12121;
+//		String courseFileCollege = "lixueyuan";
+//		String courseFileSubject = "gaodengshuxue";
+//		int courseFileGoodpoint = 0;
+//		String courseFilePath = "d://";
+//		String courseFileImgpath = "d://";
+//		int courseFileLevel = 0;
+//		boolean state = CourseFileDao.insertCourseFile(userId, courseFileName, courseFileSize, courseFileCollege,
+//				courseFileSubject,courseFileGoodpoint, courseFilePath, courseFileImgpath, courseFileLevel);
+//		if (state == true) {
+//			System.out.println("添加文件成功");
+//		} else {
+//			System.out.println("添加文件失败");
+//		}
+	CourseFile cc =new CourseFile();
+		
+		cc.setCourseFileName("lo");
+		System.out.println(cc.toString());
+		List<CourseFile> c = CourseFileDao.fileQuary(cc);
 		for (CourseFile courseFile : c) {
 			System.out.println(courseFile.toString());
 		}
 	}
 
-	@Test
-	public void testFindCourseFileById() {
-		long courseFileId = 1005;
-		CourseFile c = CourseFileDao.findCourseFileById(courseFileId);
-		if (c != null) {
-			System.out.println(c.toString());
-		} else {
-			System.out.println("文件不存在");
-		}
-
-	}
-
-	@Test
-	public void testFindCourseFileByName() {
-		String courseFileName = "gaoshu";
-		List<CourseFile> c = CourseFileDao.findCourseFileByName(courseFileName);
+	public void testFileQuary() {
+		CourseFile cc =new CourseFile();
+		
+		cc.setCourseFileName("lo");
+		System.out.println(cc.toString());
+		List<CourseFile> c = CourseFileDao.fileQuary(cc);
 		for (CourseFile courseFile : c) {
 			System.out.println(courseFile.toString());
 		}
-
 	}
 
-	@Test
-	public void testSearchCourseFilesByCollege() {
-		String courseFileCollege = "lixueyuan";
-		List<CourseFile> c = CourseFileDao.searchCourseFilesByCollege(courseFileCollege);
-		for (CourseFile co : c) {
-			System.out.println(co.toString());
-		}
-	}
+//	@Test
+//	public void testFindCourseFileById() {
+//		long courseFileId = 1005;
+//		CourseFile c = CourseFileDao.findCourseFileById(courseFileId);
+//		if (c != null) {
+//			System.out.println(c.toString());
+//		} else {
+//			System.out.println("文件不存在");
+//		}
+//
+//	}
+//
+//	@Test
+//	public void testFindCourseFileByName() {
+//		String courseFileName = "gaoshu";
+//		List<CourseFile> c = CourseFileDao.findCourseFileByName(courseFileName);
+//		for (CourseFile courseFile : c) {
+//			System.out.println(courseFile.toString());
+//		}
+//
+//	}
+//
+//	@Test
+//	public void testSearchCourseFilesByCollege() {
+//		String courseFileCollege = "lixueyuan";
+//		List<CourseFile> c = CourseFileDao.searchCourseFilesByCollege(courseFileCollege);
+//		for (CourseFile co : c) {
+//			System.out.println(co.toString());
+//		}
+//	}
 
 	@Test
 	public void testIncreaseGoodpoint() {

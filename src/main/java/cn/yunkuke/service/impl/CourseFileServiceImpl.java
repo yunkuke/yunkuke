@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import cn.yunkuke.dao.CourseFileDao;
 import cn.yunkuke.dao.UsersDao;
 import cn.yunkuke.dto.Exposer;
@@ -29,33 +28,52 @@ public class CourseFileServiceImpl implements CourseFileService {
 	@Autowired
 	private UsersDao userDao;
 
-	public List<CourseFile> getCourseFileList() {
-
-		return courseFileDao.findCourseFileAll();
+	
+	/**
+	 * 根据文件名字 学院 课程 联合查询
+	 */
+	@Override
+	public List<CourseFile> getCourseFileList(String courseFileName,String courseFileCollege,String courseFileSubject) {
+		CourseFile courseFile = new CourseFile();
+		courseFile.setCourseFileName(courseFileName);
+		courseFile.setCourseFileCollege(courseFileCollege);
+		courseFile.setCourseFileSubject(courseFileSubject);
+		
+		return courseFileDao.fileQuary(courseFile);
+	}
+	/**
+	 * 无参数查询 返回所有文件
+	 */
+	@Override
+	public List<CourseFile> getCourseFileList(){
+		return courseFileDao.fileQuary(null);
 	}
 
+	@Override
 	public CourseFile getCourseFileById(long courseFileId) {
 
 		return courseFileDao.findCourseFileById(courseFileId);
 	}
 
-	public List<CourseFile> getCourseFileByName(String courseFileName) {
-
-		return courseFileDao.findCourseFileByName(courseFileName);
-	}
-
-	public List<CourseFile> getCourseFileByCollege(String courseFileCollege) {
-
-		return courseFileDao.searchCourseFilesByCollege(courseFileCollege);
-	}
-	public List<CourseFile> getCourseFileBySubject(String courseFileSubject) {
-		return courseFileDao.searchCourseFilesBySubject(courseFileSubject);
-	}
+//	public List<CourseFile> getCourseFileByName(String courseFileName) {
+//
+//		return courseFileDao.findCourseFileByName(courseFileName);
+//	}
+//
+//	public List<CourseFile> getCourseFileByCollege(String courseFileCollege) {
+//
+//		return courseFileDao.searchCourseFilesByCollege(courseFileCollege);
+//	}
+//	public List<CourseFile> getCourseFileBySubject(String courseFileSubject) {
+//		return courseFileDao.searchCourseFilesBySubject(courseFileSubject);
+//	}
+	@Override
 	public Exposer exportDownLoadUrl(long courseId) throws CourseFileException, UsersException {
 
 		return null;
 	}
 
+	@Override
 	public boolean insertFile(String userId, String courseFileName, long courseFileSize, String courseFileCollege,
 			String courseFileSubject,int courseFileGoodpoint, String courseFilePath, String courseFileImgpath, int courseFileLevel) {
 
@@ -68,6 +86,8 @@ public class CourseFileServiceImpl implements CourseFileService {
 		
 		return courseFileDao.increaseGoodpoint(courseFileId);
 	}
+
+
 
 
 

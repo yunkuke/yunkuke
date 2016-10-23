@@ -40,23 +40,23 @@ public class CourseFileServiceImplTest extends BaseTest {
 		}
 	}
 
-	@Test
-	public void testGetCourseFileByName() {
-		String courseFileName = "gaoshu";
-		List<CourseFile> courseFile = courseFileService.getCourseFileByName(courseFileName);
-		for (CourseFile c : courseFile) {
-			System.out.println(c.toString());
-		}
-	}
-
-	@Test
-	public void testGetCourseFileByCollege() {
-		String courseFileCollege = "lixueyuan";
-		List<CourseFile> courseFile = courseFileService.getCourseFileByCollege(courseFileCollege);
-		for (CourseFile c : courseFile) {
-			System.out.println(c.toString());
-		}
-	}
+//	@Test
+//	public void testGetCourseFileByName() {
+//		String courseFileName = "gaoshu";
+//		List<CourseFile> courseFile = courseFileService.getCourseFileByName(courseFileName);
+//		for (CourseFile c : courseFile) {
+//			System.out.println(c.toString());
+//		}
+//	}
+//
+//	@Test
+//	public void testGetCourseFileByCollege() {
+//		String courseFileCollege = "lixueyuan";
+//		List<CourseFile> courseFile = courseFileService.getCourseFileByCollege(courseFileCollege);
+//		for (CourseFile c : courseFile) {
+//			System.out.println(c.toString());
+//		}
+//	}
 
 	@Test
 	public void testExportDownLoadUrl() {

@@ -17,7 +17,7 @@ CREATE TABLE users(
 --创建课程文件表
 CREATE TABLE coursefile(
 	`courseFile_id` bigint NOT NULL AUTO_INCREMENT COMMENT '课程文件id',
-	`user_id` bigint  NOT NULL COMMENT '用户id',
+	`user_id` varchar(30)  NOT NULL COMMENT '用户id',
 	`courseFile_name` varchar(120) NOT NULL COMMENT '课程文件名称',
 	`courseFile_size` bigint NOT NULL COMMENT '课程文件大小',
 	`courseFile_college` varchar(50) NOT NULL COMMENT '课程文件所属学院',

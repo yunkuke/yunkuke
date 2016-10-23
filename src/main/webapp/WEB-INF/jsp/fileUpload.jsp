@@ -1,22 +1,23 @@
 <%@page contentType="text/html; charset=UTF-8" language="java"%>
 <%@include file="common/tag.jsp"%>
 <%@include file="common/head.jsp"%>
-<jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
+<jsp:include flush="true" page="common/navigation.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
 <head>
 <title>文件上传</title>
 </head>
 <body>
-<div class="navs">
-	<form method="post" action="doFileUpload" enctype="multipart/form-data">
+	<div class="navs">
+		<form method="post" action="doFileUpload"
+			enctype="multipart/form-data">
 
-		<div class="form-group">
-			<label for="inputfile">上传文件</label> <input type="file" id="inputfile"
-				name="courseFile">
-			<p class="help-block">文件的格式必须为。。。。</p>
-		</div>
-		
+			<div class="form-group">
+				<label for="inputfile">上传文件</label> <input type="file"
+					id="inputfile" name="courseFile">
+				<p class="help-block">文件的格式必须为。。。。</p>
+			</div>
+
 			<label for="name">所属学院</label> <select class="form-control"
 				name="courseFileCollege">
 				<option>矿业工程学院</option>
@@ -44,11 +45,13 @@
 			</select>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">用户名</label>
-				<div class="col-sm-10">
-					<input class="form-control input-lg2" name="courseFileSubject"
-						type="text" placeholder="请输入课程全名">
-				</div>
+
 			</div>
+			<label>
+			<div class="col-sm-10">
+				课程名 <input class="form-control input-lg2" name="courseFileSubject"
+					type="text" placeholder="请输入课程全名">
+			</div></label>
 			<div class="radio">
 				<label> <input type="radio" name="courseFileLevel"
 					id="optionsRadios1" value="0" checked> 全部可下载
@@ -61,9 +64,9 @@
 			</div>
 
 			<button type="submit" class="btn btn-default">提交</button>
-	</form>
+		</form>
 
-</div>
+	</div>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 

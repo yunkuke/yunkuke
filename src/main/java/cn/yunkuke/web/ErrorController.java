@@ -27,6 +27,10 @@ public class ErrorController {
 		public String noPower() {
 			return "error/noPower";
 		}
+		@RequestMapping(value = "/404Error")
+		public String error404() {
+			return "error/404Error";
+		}
 	
 	
 }

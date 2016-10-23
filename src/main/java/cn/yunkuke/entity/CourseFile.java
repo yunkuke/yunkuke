@@ -1,8 +1,5 @@
 package cn.yunkuke.entity;
 
-import java.sql.Timestamp;
-import java.util.Date;
-
 /**
  * @author zhaoqinbo on 2016年7月26日
  *
@@ -26,7 +23,7 @@ public class CourseFile {
 	private long courseFileSize;
 	private String courseFileCollege;
 	private String courseFileSubject;
-	private long userId;
+	private String userId;
 	private java.sql.Date courseFileUplodeDate;
 	private int courseFileGoodpoint;
 	private String courseFilePath;
@@ -110,7 +107,7 @@ public class CourseFile {
 	/**
 	 * @return the userId
 	 */
-	public long getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
@@ -118,7 +115,7 @@ public class CourseFile {
 	 * @param userId
 	 *            the userId to set
 	 */
-	public void setUserId(long userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -198,6 +195,11 @@ public class CourseFile {
 				+ courseFileUplodeDate + ", courseFileGoodpoint=" + courseFileGoodpoint + ", courseFilePath="
 				+ courseFilePath + ", courseFileImgpath=" + courseFileImgpath + "]";
 	}
+	@Override
+	public int hashCode() {  
+		String in = Long.toString(courseFileId);  
+		return in.hashCode();  
+		}  
 
 
 }

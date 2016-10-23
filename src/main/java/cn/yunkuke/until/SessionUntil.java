@@ -3,10 +3,6 @@ package cn.yunkuke.until;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.http.HttpRequest;
-
-import cn.yunkuke.entity.Users;
-
 /** 
 * @author zqb on 2016年9月21日 
 */
