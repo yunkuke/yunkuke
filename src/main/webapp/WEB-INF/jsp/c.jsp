@@ -2,7 +2,7 @@
 <%@include file="common/tag.jsp"%>
 <%@include file="common/head.jsp"%>
 <jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
-<jsp:include flush = "true" page="fileQuary.jsp"></jsp:include>
+<jsp:include flush = "true" page="courses/fileQuary.jsp"></jsp:include>
 <!DOCTYPE HTML>
 <html>
 <head>

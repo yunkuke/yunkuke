@@ -22,8 +22,9 @@ public interface CourseFileDao {
 	 */
 	public boolean insertCourseFile(@Param("userId") String userId, @Param("courseFileName") String courseFileName,
 			@Param("courseFileSize") long courseFileSize, @Param("courseFileCollege") String courseFileCollege,
-			 @Param("courseFileSubject") String courseFileSubject,@Param("courseFileGoodpoint") int courseFileGoodpoint, @Param("courseFilePath") String courseFilePath,
-			@Param("courseFileImgpath") String courseFileImgpath, @Param("courseFileLevel") int courseFileLevel);
+			@Param("courseFileSubject") String courseFileSubject,@Param("courseFileGoodpoint") int courseFileGoodpoint, 
+			@Param("courseFilePath") String courseFilePath,@Param("courseFileImgpath") String courseFileImgpath, 
+			@Param("courseFileLevel") int courseFileLevel);
 	/**
 	 * 根据条件联合查询文件
 	 * @return
@@ -37,6 +38,12 @@ public interface CourseFileDao {
 	 * @return
 	 */
 	public CourseFile findCourseFileById(long courseFileId);
+	/**
+	 * 根据ID删除
+	 * @param courseFileId
+	 * @return
+	 */
+	public boolean deleteCourseFileById(long courseFileId);
 //
 //	/**
 //	 * 根据文件名查找

@@ -31,6 +31,8 @@ public interface CourseFileService {
 	 */
 	CourseFile getCourseFileById(long courseFileId);
 
+
+	boolean deleteCourseFileById(long courseFileId);
 //	/**
 //	 * 根据文件名查文件
 //	 * 

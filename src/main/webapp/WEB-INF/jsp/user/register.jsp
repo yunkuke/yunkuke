@@ -1,11 +1,11 @@
 <%@page contentType="text/html; charset=UTF-8" language="java"%>
-<%@include file="common/tag.jsp"%>
+<%@include file="../common/tag.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>用户注册</title>
-<%@include file="common/head.jsp"%>
-<jsp:include flush="true" page="common/navigation.jsp"></jsp:include>
+<%@include file="../common/head.jsp"%>
+<jsp:include flush="true" page="../common/navigation.jsp"></jsp:include>
 </head>
 <body>
 
@@ -127,7 +127,7 @@
 	</form>
 -->
 
-<%@include file="common/footer.jsp"%>
+<%@include file="../common/footer.jsp"%>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 

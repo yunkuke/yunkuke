@@ -17,7 +17,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="/yunkuke/index.html"><h1>云库课 </h1></a>
+					<a class="navbar-brand" href="/yunkuke/index.htm"><h1>云库课 </h1></a>
 				</div>
 				<div id="navbar" class="navbar-collapse collapse">
 					<ul class="nav navbar-nav navbar-right">
@@ -26,7 +26,7 @@
 						<%
 					if (session.getAttribute("userLevel")!=null && 1 == (int) session.getAttribute("userLevel")) {
 					%>	
-						<li><a href="/yunkuke/courses/fileUpload">上传课件</a><span class="line1">/</span></li>
+						<li><a href="/yunkuke/courses/upload">上传课件</a><span class="line1">/</span></li>
 					<%}%>
 						
 					
@@ -36,6 +36,14 @@
 					%>	
 						<li><a href="/yunkuke/user/userInfo">个人中心</a><span class="line1">/</span></li>
 						<li><a href="/yunkuke/user/logout">注销</a><span class="line1">/</span></li>
+						
+					<%}%>
+					
+					<%
+					if ("admin".equals(session.getAttribute("userId"))) {
+					%>	
+						<li><a href="/yunkuke/admin/users">用户管理</a><span class="line1">/</span></li>
+						<li><a href="/yunkuke/admin/files">文件管理</a><span class="line1">/</span></li>
 						
 					<%}%>
 						

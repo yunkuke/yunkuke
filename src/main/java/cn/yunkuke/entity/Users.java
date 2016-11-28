@@ -10,9 +10,9 @@ public class Users {
 	 * COMMENT '用户密码', `user_school` varchar(50) NOT NULL COMMENT '用户所属学校',
 	 */
 	private String userId;
-	private String userName=" ";
-	private String userSchool=" ";
-	private String userPassword=" ";
+	private String userName;
+	private String userSchool;
+	private String userPassword;
 	private int userLevel=0;
 	/*
 	 * 一个用户对应多个文件

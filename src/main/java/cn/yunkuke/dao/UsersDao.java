@@ -68,7 +68,7 @@ public interface UsersDao {
 	 * @param id
 	 * @return Users
 	 */
-	public Users findUserById(String userId);
+	public Users findUserById(@Param("userId")String userId);
 
 	/**
 	 * 根据用户名和密码查询用户是否存在

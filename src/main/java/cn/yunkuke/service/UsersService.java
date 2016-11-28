@@ -28,7 +28,10 @@ public interface UsersService {
 	 * 修改密码
 	 */
 	boolean changeUserPassword(String userId, String userPassword);
-
+	/**
+	 * 删除用户
+	 */
+	boolean deleteUser(String userId);
 	/**
 	 * 根据id查找用户
 	 */

@@ -7,17 +7,15 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.sql.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.io.FileUtils;
 
-import cn.yunkuke.dto.JSONResult;
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +28,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
+import cn.yunkuke.dto.JSONResult;
 import cn.yunkuke.entity.CourseFile;
 import cn.yunkuke.service.CourseFileService;
 import cn.yunkuke.service.UsersService;
@@ -74,7 +75,7 @@ public class CourseFileController {
 			list.addAll(courseFileMap.values());
 		//}
 		//list.addAll();
-	    System.out.println(list.size());
+	   // System.out.println(list.size());
 		}
 		else{
 		list=courseFileService.getCourseFileList(courseFileName, courseFileCollege, courseFileSubject);
@@ -104,7 +105,7 @@ public class CourseFileController {
 		LOG.info("courseFileSubject  "+courseFileSubject);
 		LOG.info("list  "+list);
 		model.addAttribute("list",list);
-		return "list";
+		return "courses/list";
 //		List<CourseFile> list = courseFileService.getCourseFileList();
 //		model.addAttribute("list",list);
 //		return "list"; // WEB-INF/JSP/"list".jsp
@@ -120,11 +121,19 @@ public class CourseFileController {
     }
 	@RequestMapping(value = "/fileQuary")
 	public String fileQuary(){
-		return "fileQuary";
+		return "courses/fileQuary";
+	}
+	@RequestMapping(value = "/seniorFileQuary")
+	public String seniorFileQuary(){
+		return "courses/seniorFileQuary";
+	}
+	@RequestMapping(value = "/upload")
+	public String home(HttpServletRequest request,Model model) {
+		return "courses/Upload";
 	}
 	@RequestMapping(value = "/fileUpload")  
 	public String fileUpload(){
-		return "fileUpload"; 
+		return "courses/fileUpload"; 
 	}
 	public String enc(String str){
 		try {
@@ -145,7 +154,7 @@ public class CourseFileController {
 	@RequestMapping(value = "/doFileUpload")  
 	public String doFileUpload(@RequestParam("courseFile") MultipartFile file,
 			HttpServletRequest request,Model model) throws IOException{
-		if(!sessionUntil.isNull(request)&&sessionUntil.getSessionLevel(request)==1){
+		if(!sessionUntil.isNull(request)&&sessionUntil.getSessionLevel(request)>=1){
 		if(!file.isEmpty()){
 			
 			LOG.info("process file{}",file.getOriginalFilename());
@@ -156,7 +165,6 @@ public class CourseFileController {
 			//服务器地址
 			StringBuilder despath = new StringBuilder().append(sepa).append("data").append(sepa).append("yunkuke");
 			String userId=sessionUntil.getSessionID(request);
-			System.out.println(userId);
 			String courseFileName = file.getOriginalFilename().replaceAll(" ", "");
 			String courseFileCollege =request.getParameter("courseFileCollege");
 			String courseFileSubject = request.getParameter("courseFileSubject");
@@ -176,7 +184,7 @@ public class CourseFileController {
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(syspath.toString(),enc(courseFileName)));
 		}
 		
-		return "success"; }else{
+		return "courses/success"; }else{
 			return "redirect:/error/noPower";
 		}
 	}
@@ -204,30 +212,30 @@ public class CourseFileController {
 		if(courseFile == null){
 			return "redirect:/error/404Error";
 		}
-		CourseFile course =courseFileService.getCourseFileById(courseFileId);
-//		if(!sessionUntil.isNull(request)&&sessionUntil.getSessionLevel(request)>=courseFile.getCourseFileLevel()){
-		response.setContentType("application/x-download"); 
+		
+		if(!sessionUntil.isNull(request)&&sessionUntil.getSessionLevel(request)>=courseFile.getCourseFileLevel()){
+		
 //		//本机测试地址
 //		String courseFilePath1 = "g:\\"+sepa+"data"+sepa+"yunkuke"+sepa+enc(course.getCourseFileCollege())+sepa+enc(course.getCourseFileSubject())+sepa+enc(course.getCourseFileName());
 //		//服务器地址
 		StringBuilder courseFilePath1 = new StringBuilder().append(sepa).append("data").append(sepa).append("yunkuke")
-				.append(sepa).append(enc(course.getCourseFileCollege())).append(sepa+enc(course.getCourseFileSubject()))
-				.append(sepa+enc(course.getCourseFileName()));
+				.append(sepa).append(enc(courseFile.getCourseFileCollege())).append(sepa+enc(courseFile.getCourseFileSubject()))
+				.append(sepa+enc(courseFile.getCourseFileName()));
 //		LOG.info(sepa+"data"+sepa+"yunkuke"+sepa+course.getCourseFileCollege()+course.getCourseFileSubject()+sepa+course.getCourseFileName());
 //		LOG.info(courseFilePath1);  
-		response.addHeader("Content-Disposition","attachment;filename=" + courseFile.getCourseFileName()); 
+		
 //		courseFilePath1="http://ow365.cn/?i=10787&furl="+"http://119.29.75.25/yunkuke/courses/"+courseFileId+"/download";
 		model.addAttribute("courseFilePath1",courseFilePath1.toString());
 //		System.out.println(courseFilePath1.toString());
-//	    
-//	    //获取下载文件露肩
+	    
+	    //获取下载文件露肩
 	    String downLoadPath = courseFilePath1.toString();
-//	  
+	  
 	    //获取文件的长度
 	    long fileLength = new File(downLoadPath).length();  
 
 	    //设置文件输出类型
-	    response.setContentType("application/octet-stream");  
+	    response.setContentType("application/x-download"); 
 	    response.setHeader("Content-disposition", "attachment; filename="  
 	        + new String(courseFile.getCourseFileName().getBytes("utf-8"), "ISO8859-1")); 
 	    //设置输出长度
@@ -248,9 +256,9 @@ public class CourseFileController {
 	  
 	    	    
         return null;
-//        }else{
-//        	return "redirect:/error/noPower";
-//        }
+        }else{
+        	return "redirect:/error/noPower";
+        }
     }
 	@RequestMapping(value = "/{courseFileId}/goodpoint",method = RequestMethod.GET) 
     public String doGoodpoint(HttpServletRequest request,  
@@ -268,4 +276,5 @@ public class CourseFileController {
 		
         return "forward:/courses/list";
     }
+	
 }

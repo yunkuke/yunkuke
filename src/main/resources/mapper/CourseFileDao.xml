@@ -36,6 +36,7 @@
 		from coursefile
 		where courseFile_name LIKE concat(concat('%',#{courseFileName}),'%')
 	</select>
+
 	<select id="searchCourseFilesByCollege" resultType="CourseFile">
 		select *
 		from
@@ -57,4 +58,9 @@
 		courseFile_goodpoint+1
 		where courseFile_id = #{courseFileId}
 	</update>
+	<delete id="deleteCourseFileById" parameterType="long">
+		delete
+		from coursefile
+		where courseFile_id = #{courseFileId}
+	</delete>
 </mapper>

@@ -1,10 +1,10 @@
 <%@page contentType="text/html; charset=UTF-8" language="java"%>
-<%@include file="common/tag.jsp"%>
+<%@include file="../common/tag.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
 <title>云库课-登录</title>
-<%@include file="common/head.jsp"%>
+<%@include file="../common/head.jsp"%>
 </head>
 <body>
 	<table class="table table-hover">

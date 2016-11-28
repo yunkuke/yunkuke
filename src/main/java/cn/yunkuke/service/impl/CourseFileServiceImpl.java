@@ -86,6 +86,11 @@ public class CourseFileServiceImpl implements CourseFileService {
 		
 		return courseFileDao.increaseGoodpoint(courseFileId);
 	}
+	@Override
+	public boolean deleteCourseFileById(long courseFileId) {
+		
+		return courseFileDao.deleteCourseFileById(courseFileId);
+	}
 
 
 

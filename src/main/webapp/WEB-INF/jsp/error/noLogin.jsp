@@ -10,9 +10,12 @@
 
 </head>
 <body>
+
 <div class="navs">
-<img  src="/yunkuke/resources/imgs/noLoginError.jpg"/>
+
+<img class="img-responsive" src="/yunkuke/resources/imgs/noLoginError.jpg"/>
 	请登陆后再试。
 </div>
+
 </body>
 </html>

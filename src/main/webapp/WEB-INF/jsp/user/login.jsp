@@ -1,5 +1,5 @@
 <%@page contentType="text/html; charset=UTF-8" language="java"%>
-<%@include file="common/tag.jsp"%>
+<%@include file="../common/tag.jsp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +7,7 @@
 <link rel="icon" href="/yunkuke/favicon.ico" type="image/x-icon" />
 <link rel="shortcut icon" href="/yunkuke/favicon.ico" type="image/x-icon" />
 <link rel="bookmark" href="/yunkuke/favicon.ico" type="image/x-icon" />
-<jsp:include flush="true" page="common/navigation.jsp"></jsp:include>
+<jsp:include flush="true" page="../common/navigation.jsp"></jsp:include>
 
 </head>
 <body>
@@ -87,7 +87,7 @@
 			</div>
 -->
 
-	<jsp:include flush="true" page="common/footer.jsp"></jsp:include>
+	<jsp:include flush="true" page="../common/footer.jsp"></jsp:include>
 	<!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
 	<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
 

@@ -9,7 +9,7 @@ use yunkuke;
 CREATE TABLE users(
 	`user_id` varchar(30) NOT NULL  COMMENT '用户id',
 	`user_name` varchar(20) NOT NULL COMMENT '用户姓名',
-	`user_password` varchar(20) NOT NULL COMMENT '用户密码',
+	`user_password` varchar(32) NOT NULL COMMENT '用户密码',
 	`user_school` varchar(50) NOT NULL COMMENT '用户所属学校',
 	`user_level` int NOT NULL COMMENT '用户级别',
 	PRIMARY KEY(`user_id`)

@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8" language="java"%>
-<%@include file="common/tag.jsp"%>
-<%@include file="common/head.jsp"%>
-<jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
+<%@include file="../common/tag.jsp"%>
+<%@include file="../common/head.jsp"%>
+<jsp:include flush = "true" page="../common/navigation.jsp"></jsp:include>
 <!DOCTYPE HTML>
 <html>
 <head>

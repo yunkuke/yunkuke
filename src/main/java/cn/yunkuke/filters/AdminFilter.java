@@ -12,15 +12,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+
 /** 
-* @author zqb on 2016年9月17日 
+* @author zqb on 2016年11月28日 
 */
-public class LoginFilter implements Filter {
+public class AdminFilter implements Filter{
 
 	@Override
 	public void destroy() {
+		// TODO Auto-generated method stub
 		
-
 	}
 
 	@Override
@@ -35,19 +36,21 @@ public class LoginFilter implements Filter {
 			arg2.doFilter(arg0, arg1);
 		}
 		
-		if(session.getAttribute("userId")!=null){
+		if("admin".equals(session.getAttribute("userId"))){
 			arg2.doFilter(arg0, arg1);
 		}else{
 			//arg2.doFilter(arg0, arg1);
-			response.sendRedirect("/yunkuke/error/noLogin");
+			response.sendRedirect("/yunkuke/error/noPower");
 		}
-
+		
 	}
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
+		// TODO Auto-generated method stub
 		
-
 	}
+
+	
 
 }

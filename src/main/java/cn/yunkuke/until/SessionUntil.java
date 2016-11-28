@@ -13,7 +13,7 @@ public class SessionUntil {
 
 	}
 	public boolean isNull(HttpServletRequest request){
-		if(request.getSession()==null){
+		if(null==request.getSession()){
 			return true;
 		}else{
 			return false;

@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8" language="java"%>
-<%@include file="common/tag.jsp"%>
-<%@include file="common/head.jsp"%>
-<jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
+<%@include file="../common/tag.jsp"%>
+<%@include file="../common/head.jsp"%>
+<jsp:include flush = "true" page="../common/navigation.jsp"></jsp:include>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -9,7 +9,7 @@
 	<section class="about-intro">
 		<div class="container">
 			<!-- Intro Content -->
-			<div class="row">
+			<div class="row">			
 				<div class="col-md-6">
 					<video id="example_video_1" class="video-js vjs-default-skin"
 						controls preload="none" width="480" height="320"
@@ -17,6 +17,7 @@
 						<source src="resources/aboutmv/logomv.mp4" type='video/mp4' />
 					</video>
 				</div>
+			</div>
 				<div class="col-md-6">
 					<h3>中国矿业大学</h3>
 					<p>来自计算机学院自我组建的项目开发团队</p>
@@ -94,7 +95,7 @@
 	<!-- contact section -->
 
 	<!-- /contact section -->
-	<jsp:include flush="true" page="common/footer.jsp"></jsp:include>
+	<jsp:include flush="true" page="../common/footer.jsp"></jsp:include>
 
 	<!-- /js for banner -->
 	<!-- /js files -->

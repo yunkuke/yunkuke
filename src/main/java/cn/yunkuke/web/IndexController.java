@@ -25,16 +25,17 @@ public class IndexController {
 
 	@RequestMapping(value = "/index.htm")
 	public String index(HttpServletRequest request,Model model) {
-		return "index";
+		return "index/index";
 	}
 	@RequestMapping(value = "/about.htm")
 	public String about(HttpServletRequest request,Model model) {
-		return "about";
+		return "index/about";
 	}
 	@RequestMapping(value = "/c")
 	public String c(HttpServletRequest request,Model model) {
 		return "c";
 	}
+
 	@RequestMapping(value = "/time",method = RequestMethod.GET,produces = {"application/json;charset=UTF-8"})
 	@ResponseBody
     public JSONResult<Long> execute(Model model) {

@@ -1,7 +1,7 @@
 <%@page contentType="text/html; charset=UTF-8" language="java"%>
-<%@include file="common/tag.jsp"%>
-<%@include file="common/head.jsp"%>
-<jsp:include flush = "true" page="common/navigation.jsp"></jsp:include>
+<%@include file="../common/tag.jsp"%>
+<%@include file="../common/head.jsp"%>
+<jsp:include flush = "true" page="../common/navigation.jsp"></jsp:include>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,10 +9,7 @@
 </head>
 <body>
 <div class="navs">
-	<div class="container">
-		<div class="panel panel-default">
-		
-			<div class="panel-body">
+	<div class="table-responsive">
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -23,20 +20,21 @@
 						</tr>
 					</thead>
 					<tbody>
+						<c:forEach items="${allUser}" var="usr">
 							<tr>
-								<td>${userInfo.userId}</td>
-								<td>${userInfo.userName}</td>
-								<td>${userInfo.userSchool}</td>
-								<td>${uLevel}</td>
+								<td>${usr.userId}</td>
+								<td>${usr.userName}</td>
+								<td>${usr.userSchool}</td>
+								<td>${usr.userLevel}</td>
+								<td><a class="btn btn-info"
+									href="/yunkuke/admin/${usr.userId}/deletion"
+									 >删除</a></td>
 							</tr>
 							
-						
+						</c:forEach>			
 					</tbody>
 				</table>
-
-			</div>
 		</div>
-	</div>
 </div>
 
 
@@ -47,6 +45,6 @@
 	<script
 		src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 	
-	<%@include file="common/footer.jsp"%>
+	<%@include file="../common/footer.jsp"%>
 </body>
 </html>

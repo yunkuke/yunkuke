@@ -9,7 +9,7 @@
 <title>404</title>
 </head>
 <body>
-	<img src=".../resources/imgs/404Error.jpg"/>
+	<img class="img-responsive" src=".../resources/imgs/404Error.jpg"/>
 	页面找不到啦
 </body>
 </html>

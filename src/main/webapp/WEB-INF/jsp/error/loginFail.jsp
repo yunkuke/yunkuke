@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="navs">
-	<img src="/yunkuke/resources/imgs/noLoginError.jpg" />
+	<img class="img-responsive" src="/yunkuke/resources/imgs/noLoginError.jpg" />
 	<h1>登陆失败</h1>
 </div>
 </body>

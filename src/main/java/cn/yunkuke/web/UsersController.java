@@ -31,7 +31,7 @@ public class UsersController {
 		if (login != null) {
 			return "redirect:/user/userInfo";
 		} else {
-			return "login";
+			return "user/login";
 		}
 	}
 
@@ -62,7 +62,7 @@ public class UsersController {
 
 	@RequestMapping(value = "/register")
 	public String register() {
-		return "register";
+		return "user/register";
 	}
 
 	@RequestMapping(value = "/userInfo")
@@ -80,7 +80,7 @@ public class UsersController {
 			}
 			model.addAttribute("uLevel",ulevel);
 			model.addAttribute("userInfo", user);
-			return "userInfo";
+			return "user/userInfo";
 		} catch (Exception e) {
 			return "redirect:../error/noLogin";
 		}
@@ -91,7 +91,7 @@ public class UsersController {
 		// HttpServletRequest
 		HttpSession session = request.getSession();
 		session.invalidate();
-		return "login";
+		return "user/login";
 	}
 
 	@RequestMapping(value = "/doRegister")
@@ -105,6 +105,28 @@ public class UsersController {
 		} else {
 			return "redirect:/user/register";
 		}
+	}
+	
+	@RequestMapping(value = "/changeUserPwd")
+	public String changeUserPwd(HttpServletRequest request){
+		String userId = null;
+		HttpSession session = null;
+		String userOldPassword = null;
+		String userNewPassword = null;
+		try {
+			userOldPassword=request.getParameter("userOldPassword");
+			userNewPassword=request.getParameter("userNewPassword");
+			session = request.getSession();
+			userId = (String) session.getAttribute("userId");
+		
+		} catch (Exception e) {
+			
+		}
+		if(usersService.login(userId, userOldPassword)){
+				usersService.changeUserPassword(userId, userNewPassword);
+				return "courses/success";
+			}
+		return null;
 	}
 
 }
