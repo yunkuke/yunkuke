@@ -35,7 +35,7 @@ public class UsersServiceImpl implements UsersService {
 	
 	@Override
 	public boolean register(String userId, String userName, String userPassword, String userSchool, int userLevel) {
-		System.out.println(MD5(userPassword));
+		//System.out.println(MD5(userPassword));	    
 		return usersDao.insertUsers(userId, userName,MD5(userPassword), userSchool, userLevel);
 	}
 
@@ -48,8 +48,14 @@ public class UsersServiceImpl implements UsersService {
 
 	@Override
 	public boolean changeUserPassword(String userId, String userPassword) {
-		
+	    if(null!=usersDao.findUserById(userId))
+	    {
 		return usersDao.changeUsersPassword(userId, MD5(userPassword));
+		}
+	    else
+	    {
+	        return false;
+	    }
 	}
 
 	@Override

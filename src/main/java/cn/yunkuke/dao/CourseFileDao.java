@@ -18,7 +18,7 @@ public interface CourseFileDao {
 	 * courseFileUplodeDate; private int courseFileGoodpoint; private String
 	 * courseFilePath; private String courseFileImgpath;
 	 * 
-	 * @return
+	 * @return 插入成功
 	 */
 	public boolean insertCourseFile(@Param("userId") String userId, @Param("courseFileName") String courseFileName,
 			@Param("courseFileSize") long courseFileSize, @Param("courseFileCollege") String courseFileCollege,

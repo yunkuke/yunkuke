@@ -18,42 +18,47 @@ import cn.yunkuke.service.CourseFileService;
  * @author zqb on 2016年7月28日
  */
 @Service
-public class CourseFileServiceImpl implements CourseFileService {
 
-	private final static Logger LOG = LoggerFactory.getLogger(CourseFileServiceImpl.class);
+public class CourseFileServiceImpl implements CourseFileService 
+{
+
+    private final static Logger LOG = LoggerFactory.getLogger(CourseFileServiceImpl.class);
 
 	// 注入Service依赖
-	@Autowired
+    @Autowired
 	private CourseFileDao courseFileDao;
-	@Autowired
+    @Autowired
 	private UsersDao userDao;
 
 	
 	/**
 	 * 根据文件名字 学院 课程 联合查询
 	 */
-	@Override
-	public List<CourseFile> getCourseFileList(String courseFileName,String courseFileCollege,String courseFileSubject) {
-		CourseFile courseFile = new CourseFile();
-		courseFile.setCourseFileName(courseFileName);
-		courseFile.setCourseFileCollege(courseFileCollege);
-		courseFile.setCourseFileSubject(courseFileSubject);
+    @Override
+public List<CourseFile> getCourseFileList(String courseFileName,String courseFileCollege,String courseFileSubject) 
+    {
+	CourseFile courseFile = new CourseFile();
+	courseFile.setCourseFileName(courseFileName);
+	courseFile.setCourseFileCollege(courseFileCollege);
+	courseFile.setCourseFileSubject(courseFileSubject);
 		
-		return courseFileDao.fileQuary(courseFile);
-	}
+	return courseFileDao.fileQuary(courseFile);
+    }
 	/**
 	 * 无参数查询 返回所有文件
 	 */
-	@Override
-	public List<CourseFile> getCourseFileList(){
-		return courseFileDao.fileQuary(null);
-	}
+    @Override
+	public List<CourseFile> getCourseFileList()
+    {
+        return courseFileDao.fileQuary(null);
+    }
 
-	@Override
-	public CourseFile getCourseFileById(long courseFileId) {
+    @Override
+	public CourseFile getCourseFileById(long courseFileId) 
+    {
 
-		return courseFileDao.findCourseFileById(courseFileId);
-	}
+        return courseFileDao.findCourseFileById(courseFileId);
+    }
 
 //	public List<CourseFile> getCourseFileByName(String courseFileName) {
 //
@@ -67,33 +72,29 @@ public class CourseFileServiceImpl implements CourseFileService {
 //	public List<CourseFile> getCourseFileBySubject(String courseFileSubject) {
 //		return courseFileDao.searchCourseFilesBySubject(courseFileSubject);
 //	}
-	@Override
-	public Exposer exportDownLoadUrl(long courseId) throws CourseFileException, UsersException {
+    @Override
+	public Exposer exportDownLoadUrl(long courseId) throws CourseFileException, UsersException 
+    {
+        return null;
+    }
 
-		return null;
-	}
-
-	@Override
+    @Override
 	public boolean insertFile(String userId, String courseFileName, long courseFileSize, String courseFileCollege,
-			String courseFileSubject,int courseFileGoodpoint, String courseFilePath, String courseFileImgpath, int courseFileLevel) {
-
-		return courseFileDao.insertCourseFile(userId, courseFileName, courseFileSize, courseFileCollege,
+			String courseFileSubject,int courseFileGoodpoint, String courseFilePath, String courseFileImgpath, int courseFileLevel) 
+    {
+        return courseFileDao.insertCourseFile(userId, courseFileName, courseFileSize, courseFileCollege,
 				courseFileSubject,courseFileGoodpoint, courseFilePath, courseFileImgpath, courseFileLevel);
-	}
+    }
 
-	@Override
-	public boolean increaseGoodpoint(long courseFileId) {
-		
-		return courseFileDao.increaseGoodpoint(courseFileId);
-	}
-	@Override
-	public boolean deleteCourseFileById(long courseFileId) {
-		
-		return courseFileDao.deleteCourseFileById(courseFileId);
-	}
-
-
-
-
+    @Override
+	public boolean increaseGoodpoint(long courseFileId) 
+    {		
+        return courseFileDao.increaseGoodpoint(courseFileId);
+    }
+    @Override
+	public boolean deleteCourseFileById(long courseFileId) 
+    {		
+        return courseFileDao.deleteCourseFileById(courseFileId);
+    }
 
 }

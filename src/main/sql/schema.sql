@@ -14,6 +14,26 @@ CREATE TABLE users(
 	`user_level` int NOT NULL COMMENT '用户级别',
 	PRIMARY KEY(`user_id`)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='用户表';
+
+
+CREATE TABLE zhpcusers(
+    `user_id` bigint NOT NULL AUTO_INCREMENT COMMENT '用户id',
+    `user_phone` varchar(30) NOT NULL  COMMENT '用户电话',
+    `user_nickname` varchar(20) NOT NULL COMMENT '用户昵称',
+    `user_password` varchar(32) NOT NULL COMMENT '用户密码',    
+    `user_type` int NOT NULL COMMENT '用户类型',
+    `user_sex` int NOT NULL COMMENT '用户性别',
+    PRIMARY KEY(`user_id`),
+    UNIQUE KEY (`user_phone`)
+)ENGINE=InnoDB  AUTO_INCREMENT=1000 DEFAULT CHARSET=utf8 COMMENT='拼车用户表';
+
+CREATE TABLE zhpcpcxx(    
+    `user_id` varchar(30)  NOT NULL COMMENT '用户id',    
+    `start_pc` varchar(120) NOT NULL COMMENT '起点',
+    `end_pc` varchar(120) NOT NULL COMMENT '终点',
+    `car_Time` varchar(30) NOT NULL  COMMENT '预约时间',    
+    PRIMARY KEY(`user_id`)
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='拼车表';
 --创建课程文件表
 CREATE TABLE coursefile(
 	`courseFile_id` bigint NOT NULL AUTO_INCREMENT COMMENT '课程文件id',

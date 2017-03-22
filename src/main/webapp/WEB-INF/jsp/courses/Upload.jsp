@@ -27,8 +27,8 @@
             <div class="col-md-3 col-sm-6">
 				<div class="thumbnail">
 					<div class="hi-icon-wrap hi-icon-effect-5 hi-icon-effect-5c">
-						<a href="/yunkuke/courses/fileUpload" class="hi-icon hi-icon-pencil">Mobile</a>
-					</div>
+                        <a href="/yunkuke/courses/fileUpload" class="hi-icon hi-icon-pencil">Mobile</a>
+                    </div>
 					<h4>自制</h4>
 					<p class="service-p1">由个人制作的课件，这个声明不会对您的课件上传产生任何影响，只针对于我们的审核而言进行</p>
 				</div>	

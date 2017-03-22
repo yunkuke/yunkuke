@@ -16,6 +16,13 @@
 			<version>4.11</version>
 
 		</dependency>
+		<dependency>
+            <!--使用junit4，4以上使用注解 -->
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.0.0-M3</version>
+
+        </dependency>
 		<!--补全项目依赖 -->
 		<!--1:日志，java日志：slf4j,log4j,logback,common-logging 使用：slf4j+logBack -->
 		<dependency>

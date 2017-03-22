@@ -32,9 +32,10 @@ import cn.yunkuke.service.UsersService;
  */
 @Controller
 @RequestMapping("/admin")
-public class AdminController {
+public class AdminController 
+{
 
-	@Autowired
+    @Autowired
 	private UsersService usersService;
 	@Autowired
 	private CourseFileService courseFileService;
